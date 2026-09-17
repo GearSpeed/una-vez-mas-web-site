@@ -1,0 +1,596 @@
+<!-- ===================== HERO ===================== -->
+<section
+  class="relative w-full overflow-hidden bg-surface-container-low py-space-xl lg:py-space-2xl"
+>
+  <div
+    aria-hidden="true"
+    class="absolute -top-32 -left-32 w-96 h-96 rounded-full bg-tertiary-fixed/30 blur-3xl pointer-events-none"
+  ></div>
+  <div
+    aria-hidden="true"
+    class="absolute top-1/2 -right-40 w-[30rem] h-[30rem] rounded-full bg-primary-fixed/40 blur-3xl pointer-events-none"
+  ></div>
+
+  <div class="max-w-7xl mx-auto px-margin lg:px-margin-desktop relative z-10">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-space-xl items-center">
+      <!-- Texto -->
+      <div class="lg:col-span-6 flex flex-col items-start gap-space-md">
+        <p
+          class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-surface-container-highest shadow-sm"
+        >
+          <span
+            aria-hidden="true"
+            class="w-2.5 h-2.5 rounded-full bg-secondary-container animate-pulse"
+          ></span>
+          <span class="font-label-sm text-label-sm text-primary tracking-wide uppercase">
+            Deliciosos por naturaleza
+          </span>
+        </p>
+
+        <div class="flex flex-col gap-2">
+          <h1
+            class="font-display-lg text-headline-xl sm:text-display-lg text-primary leading-[1.08] tracking-tight"
+          >
+            Antojitos <br class="hidden sm:block" />ancestrales
+          </h1>
+          <p class="font-headline-md text-headline-md text-secondary tracking-tight">
+            {{ sitio.descriptor }}
+          </p>
+        </div>
+
+        <p class="font-body-lg text-body-lg text-on-surface-variant max-w-xl">
+          Descubre sabores que combinan tradición, ingredientes deliciosos y el gusto genuino de
+          compartir cada bocado hecho a mano con el corazón.
+        </p>
+
+        <!-- CTAs -->
+        <div
+          class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 w-full sm:w-auto pt-2"
+        >
+          <a
+            class="h-[52px] px-8 rounded-full bg-primary-container text-on-primary font-label-lg text-label-lg flex items-center justify-center gap-2 shadow-lg shadow-primary-container/20 hover:bg-secondary-container hover:scale-[1.02] transition-all"
+            routerLink="/catalogo"
+          >
+            <span>Explorar catálogo</span>
+            <span aria-hidden="true" class="material-symbols-outlined text-[20px]"
+              >arrow_forward</span
+            >
+          </a>
+          <a
+            class="h-[52px] px-6 rounded-full bg-surface-container-lowest text-primary font-label-lg text-label-lg flex items-center justify-center gap-2.5 shadow-sm hover:bg-surface-container-high transition-all"
+            rel="noopener noreferrer"
+            target="_blank"
+            [href]="waProductos"
+          >
+            <span aria-hidden="true" class="material-symbols-outlined text-secondary text-[22px]"
+              >chat</span
+            >
+            <span>Pedir por WhatsApp</span>
+          </a>
+        </div>
+
+        <!-- Micro-destacados -->
+        <ul class="grid grid-cols-3 gap-3 w-full max-w-lg pt-4 list-none p-0 m-0">
+          <li class="p-3 rounded-2xl bg-surface-container-lowest/90 shadow-sm flex flex-col gap-1">
+            <span aria-hidden="true" class="material-symbols-outlined text-primary text-[22px]"
+              >spa</span
+            >
+            <span class="font-label-sm text-label-sm text-primary">100% Mexicano</span>
+            <span class="font-body-sm text-body-sm text-on-surface-variant">Siembra local</span>
+          </li>
+          <li class="p-3 rounded-2xl bg-surface-container-lowest/90 shadow-sm flex flex-col gap-1">
+            <span aria-hidden="true" class="material-symbols-outlined text-secondary text-[22px]"
+              >pan_tool</span
+            >
+            <span class="font-label-sm text-label-sm text-secondary">Elaboración</span>
+            <span class="font-body-sm text-body-sm text-on-surface-variant">Artesanal real</span>
+          </li>
+          <li class="p-3 rounded-2xl bg-surface-container-lowest/90 shadow-sm flex flex-col gap-1">
+            <span
+              aria-hidden="true"
+              class="material-symbols-outlined text-on-tertiary-fixed-variant text-[22px]"
+            >
+              favorite
+            </span>
+            <span class="font-label-sm text-label-sm text-on-tertiary-fixed-variant"
+              >Hecho con miel</span
+            >
+            <span class="font-body-sm text-body-sm text-on-surface-variant">Endulzado fiel</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Visual -->
+      <div class="lg:col-span-6 relative flex justify-center">
+        <div
+          class="relative w-full max-w-[560px] rounded-3xl overflow-hidden shadow-2xl bg-surface-container-high p-3"
+        >
+          <div class="relative rounded-2xl overflow-hidden aspect-[16/10] bg-surface-container">
+            <img
+              alt="Ami y Ranto, las mascotas de Una vez más, sembrando en un campo de amaranto junto a un letrero de madera que dice Una vez más"
+              class="w-full h-full object-cover transform hover:scale-105 transition-transform duration-700"
+              decoding="async"
+              fetchpriority="high"
+              height="737"
+              src="img/marca/portada.jpg"
+              width="1200"
+            />
+          </div>
+          <p
+            class="absolute bottom-6 left-6 right-6 p-4 rounded-2xl bg-surface-container-lowest/95 backdrop-blur-md shadow-lg flex items-center gap-3 m-0"
+          >
+            <span
+              aria-hidden="true"
+              class="w-11 h-11 rounded-full bg-primary-container text-on-primary flex items-center justify-center shrink-0"
+            >
+              <span class="material-symbols-outlined text-[24px]">verified</span>
+            </span>
+            <span class="flex flex-col min-w-0">
+              <span class="font-label-md text-label-md text-primary">
+                ¡Ami y Ranto te dan la bienvenida!
+              </span>
+              <span class="font-body-sm text-body-sm text-on-surface-variant">
+                Cosechamos tradición para regalar momentos dulces y sanos.
+              </span>
+            </span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CATEGORÍAS ===================== -->
+<section class="w-full py-space-2xl bg-surface">
+  <div class="max-w-7xl mx-auto px-margin lg:px-margin-desktop">
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-space-xl">
+      <div>
+        <p class="font-label-sm text-label-sm uppercase tracking-widest text-secondary">
+          Variedad &amp; Sabor
+        </p>
+        <h2 class="font-headline-xl text-headline-xl text-primary mt-1">
+          Nuestras Categorías Dulces
+        </h2>
+      </div>
+      <p class="font-body-md text-body-md text-on-surface-variant max-w-md">
+        Recetas ancestrales reinterpretadas con toques contemporáneos, texturas balanceadas y el
+        crujido inconfundible del amaranto.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-space-lg">
+      @for (vitrina of vitrinas; track vitrina.categoria) {
+        <article
+          class="group relative rounded-3xl bg-surface-container-lowest p-6 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between overflow-hidden"
+        >
+          <div
+            aria-hidden="true"
+            [class]="
+              'absolute top-0 right-0 w-32 h-32 rounded-bl-full pointer-events-none transition-transform group-hover:scale-110 ' +
+              manchaTono[vitrina.tono]
+            "
+          ></div>
+          <div>
+            <div class="h-44 w-full rounded-2xl bg-surface-container-high overflow-hidden mb-5">
+              <img
+                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                decoding="async"
+                height="436"
+                loading="lazy"
+                width="800"
+                [alt]="vitrina.alt"
+                [src]="'img/' + vitrina.imagen"
+              />
+            </div>
+            <p
+              [class]="
+                'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface-container-high font-label-sm text-label-sm mb-2 ' +
+                textoTono[vitrina.tono]
+              "
+            >
+              <span aria-hidden="true" class="material-symbols-outlined text-[16px]">
+                {{ vitrina.insigniaIcono }}
+              </span>
+              <span>{{ vitrina.insignia }}</span>
+            </p>
+            <h3 class="font-headline-md text-headline-md text-on-surface mb-2">
+              {{ vitrina.titulo }}
+            </h3>
+            <p class="font-body-sm text-body-sm text-on-surface-variant mb-4">
+              {{ vitrina.descripcion }}
+            </p>
+          </div>
+          <a
+            [class]="
+              'font-label-md text-label-md flex items-center gap-2 transition-colors hover:text-secondary ' +
+              textoTono[vitrina.tono]
+            "
+            routerLink="/catalogo"
+            [queryParams]="{ cat: vitrina.categoria }"
+          >
+            <span>{{ vitrina.cta }}</span>
+            <span
+              aria-hidden="true"
+              class="material-symbols-outlined text-[18px] transition-transform group-hover:translate-x-1"
+              >arrow_forward</span
+            >
+          </a>
+        </article>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- ===================== DESTACADOS ===================== -->
+<section class="w-full py-space-2xl bg-surface-container-low">
+  <div class="max-w-7xl mx-auto px-margin lg:px-margin-desktop">
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-space-xl">
+      <div>
+        <p class="font-label-sm text-label-sm uppercase tracking-widest text-primary">
+          Selección Consentida
+        </p>
+        <h2 class="font-headline-xl text-headline-xl text-primary mt-1">
+          Los Favoritos de la Casa
+        </h2>
+      </div>
+      <a
+        class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-surface-container-lowest font-label-md text-label-md text-primary shadow-sm hover:bg-surface-container transition-all"
+        routerLink="/catalogo"
+      >
+        <span>Ver catálogo completo</span>
+        <span aria-hidden="true" class="material-symbols-outlined text-[18px]">menu_book</span>
+      </a>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-space-lg">
+      @for (destacado of destacados; track destacado.productoId) {
+        <article
+          class="rounded-3xl bg-surface-container-lowest p-5 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col justify-between"
+        >
+          <div>
+            <div class="relative h-48 w-full rounded-2xl overflow-hidden bg-surface-container mb-4">
+              <img
+                class="w-full h-full object-cover"
+                decoding="async"
+                height="382"
+                loading="lazy"
+                width="700"
+                [alt]="destacado.alt"
+                [src]="'img/' + destacado.imagen"
+              />
+              <span
+                [class]="
+                  'absolute top-3 left-3 px-3 py-1 rounded-full bg-surface-container-lowest/90 font-label-sm text-label-sm shadow-sm ' +
+                  etiquetaTono[destacado.etiquetaTono]
+                "
+                >{{ destacado.etiqueta }}</span
+              >
+            </div>
+            <p class="flex items-center gap-2 mb-1">
+              <span
+                aria-hidden="true"
+                class="material-symbols-outlined is-filled text-tertiary-fixed-dim text-[18px]"
+                >star</span
+              >
+              <span class="font-label-sm text-label-sm text-on-surface-variant">{{
+                destacado.quip
+              }}</span>
+            </p>
+            <h3 class="font-headline-sm text-headline-sm text-on-surface mb-1">
+              <a
+                class="hover:text-primary transition-colors"
+                [routerLink]="['/catalogo', destacado.productoId]"
+              >
+                {{ destacado.nombre }}
+              </a>
+            </h3>
+            <p class="font-body-sm text-body-sm text-on-surface-variant mb-4">
+              {{ destacado.resumen }}
+            </p>
+          </div>
+          <div class="pt-3 flex items-center justify-between gap-2">
+            <p class="m-0">
+              @if (destacado.presentacion) {
+                <span
+                  class="font-label-sm text-label-sm text-on-surface-variant block leading-tight mb-0.5"
+                >
+                  {{ destacado.presentacion }}
+                </span>
+              }
+              <span class="font-headline-sm text-headline-sm text-primary font-bold">
+                @if (destacado.precio !== null) {
+                  ${{ destacado.precio }} MXN
+                } @else {
+                  Consulta precio
+                }
+              </span>
+            </p>
+            <a
+              class="h-10 px-4 rounded-full bg-primary-container text-on-primary font-label-md text-label-md flex items-center gap-1.5 hover:bg-secondary-container transition-transform active:scale-95 shadow-sm shrink-0"
+              rel="noopener noreferrer"
+              target="_blank"
+              [href]="waDestacado(destacado)"
+            >
+              <span aria-hidden="true" class="material-symbols-outlined text-[16px]">chat</span>
+              <span>Me interesa</span>
+            </a>
+          </div>
+        </article>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- ===================== HISTORIA DEL AMARANTO ===================== -->
+<section class="w-full py-space-2xl bg-surface relative overflow-hidden">
+  <div class="max-w-7xl mx-auto px-margin lg:px-margin-desktop">
+    <div
+      class="rounded-3xl bg-surface-container-high/60 p-space-lg lg:p-space-2xl relative overflow-hidden"
+    >
+      <div
+        aria-hidden="true"
+        class="absolute -right-16 -bottom-16 w-80 h-80 opacity-15 pointer-events-none text-primary"
+      >
+        <svg class="w-full h-full" fill="currentColor" viewBox="0 0 200 200">
+          <path
+            d="M100 0 C120 40 160 50 200 50 C160 80 150 120 150 160 C120 140 100 120 100 200 C100 120 80 140 50 160 C50 120 40 80 0 50 C40 50 80 40 100 0 Z"
+          ></path>
+        </svg>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-space-xl items-center relative z-10">
+        <div class="lg:col-span-7 flex flex-col gap-space-sm">
+          <p
+            class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary-fixed text-on-primary-fixed font-label-sm text-label-sm w-fit"
+          >
+            <span aria-hidden="true" class="material-symbols-outlined text-[16px]"
+              >history_edu</span
+            >
+            <span>Raíz Sagrada Mexicana</span>
+          </p>
+          <h2 class="font-headline-xl text-headline-xl text-primary leading-tight">
+            El grano que desafió el tiempo:<br />
+            <span class="text-secondary font-headline-lg">Alegría y energía milenaria</span>
+          </h2>
+          <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+            El amaranto (o <em>huautli</em>) es mucho más que un cultivo: es un emblema alimentario
+            ancestral valorado por pueblos originarios como fuente de vitalidad, resistencia y
+            espiritualidad. Los campos florecen con espigas fucsias y carmesí que luego entregan
+            semillitas diminutas de enorme nobleza nutricional.
+          </p>
+          <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+            En <strong class="text-primary font-semibold">{{ sitio.nombre }}</strong> honramos este
+            linaje respetando los tiempos de cosecha, tostando con suavidad cada grano en comales
+            tradicionales y endulzándolo como antaño: con miel pura de abeja y piloncillo de caña.
+          </p>
+
+          <ul class="grid grid-cols-2 sm:grid-cols-3 gap-4 pt-4 list-none p-0 m-0">
+            <li class="p-3.5 rounded-2xl bg-surface-container-lowest/80 shadow-sm flex flex-col">
+              <span class="font-headline-md text-headline-md text-primary font-bold">+5000</span>
+              <span class="font-body-sm text-body-sm text-on-surface-variant">
+                Años de historia en México
+              </span>
+            </li>
+            <li class="p-3.5 rounded-2xl bg-surface-container-lowest/80 shadow-sm flex flex-col">
+              <span class="font-headline-md text-headline-md text-secondary font-bold">100%</span>
+              <span class="font-body-sm text-body-sm text-on-surface-variant">
+                Origen campesino local
+              </span>
+            </li>
+            <li
+              class="p-3.5 rounded-2xl bg-surface-container-lowest/80 shadow-sm flex flex-col col-span-2 sm:col-span-1"
+            >
+              <span
+                class="font-headline-md text-headline-md text-on-tertiary-fixed-variant font-bold"
+                >0%</span
+              >
+              <span class="font-body-sm text-body-sm text-on-surface-variant">
+                Jarabe artificial o aditivos
+              </span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="lg:col-span-5 flex justify-center">
+          <figure
+            class="relative w-full max-w-sm rounded-3xl bg-surface-container-lowest p-3 shadow-xl transform rotate-1 hover:rotate-0 transition-transform duration-500 m-0"
+          >
+            <div class="rounded-2xl overflow-hidden aspect-[4/5] bg-surface-container">
+              <img
+                alt="Manos campesinas sosteniendo semillas de amaranto reventado junto a un frasco de miel, en un campo de espigas magenta"
+                class="w-full h-full object-cover"
+                decoding="async"
+                height="436"
+                loading="lazy"
+                src="img/editorial/cosecha-amaranto.jpg"
+                width="800"
+              />
+            </div>
+            <figcaption class="p-4 text-center">
+              <span class="font-label-md text-label-md text-primary block">
+                Siembra limpia &amp; comercio justo
+              </span>
+              <span class="font-body-sm text-body-sm text-on-surface-variant">
+                Cada paquete apoya a familias productoras mexicanas.
+              </span>
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== AMI & RANTO ===================== -->
+<section class="w-full py-space-2xl bg-surface-container-low relative">
+  <div class="max-w-7xl mx-auto px-margin lg:px-margin-desktop">
+    <div class="text-center max-w-2xl mx-auto mb-space-xl">
+      <p
+        class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-surface-container-high text-primary font-label-sm text-label-sm mb-3 shadow-sm"
+      >
+        <span aria-hidden="true" class="material-symbols-outlined text-[18px]"
+          >volunteer_activism</span
+        >
+        <span>Nuestros Anfitriones</span>
+      </p>
+      <h2 class="font-display-lg text-headline-xl lg:text-display-lg text-primary tracking-tight">
+        Ami &amp; Ranto
+      </h2>
+      <p class="font-headline-sm text-headline-sm text-secondary mt-1">
+        Pequeñas semillas, grandes historias
+      </p>
+      <p class="font-body-md text-body-md text-on-surface-variant mt-2">
+        Dos entrañables personajes que encarnan lo mejor de nuestra tierra: la pureza de la semilla
+        y la alegre vivacidad de la flor de amaranto.
+      </p>
+    </div>
+
+    <div class="rounded-3xl bg-surface-container-lowest p-6 lg:p-8 shadow-md mb-space-lg">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg items-center">
+        <div
+          class="lg:col-span-7 rounded-2xl overflow-hidden bg-surface-container-high/60 shadow-inner p-2"
+        >
+          <img
+            alt="Hoja de personajes de Ami y Ranto: expresiones, poses y usos de la semilla y la flor de amaranto"
+            class="w-full h-auto rounded-xl object-contain"
+            decoding="async"
+            height="1024"
+            loading="lazy"
+            src="img/marca/ami-y-ranto.jpg"
+            width="1536"
+          />
+        </div>
+
+        <div class="lg:col-span-5 flex flex-col gap-6">
+          <article
+            class="p-5 rounded-2xl bg-surface-container-low flex items-start gap-4 shadow-sm hover:bg-surface-container transition-colors"
+          >
+            <span
+              aria-hidden="true"
+              class="w-14 h-14 rounded-2xl bg-tertiary-fixed flex items-center justify-center shrink-0 shadow-sm text-on-tertiary-fixed font-headline-md font-bold"
+              >A</span
+            >
+            <div class="flex flex-col">
+              <div class="flex items-center gap-2">
+                <h3 class="font-headline-md text-headline-md text-primary">Ami</h3>
+                <span
+                  class="px-2.5 py-0.5 rounded-full bg-tertiary-fixed-dim/40 font-label-sm text-label-sm text-on-tertiary-fixed"
+                  >La Semilla</span
+                >
+              </div>
+              <p class="font-body-sm text-body-sm text-on-surface-variant mt-1">
+                La semillita curiosa y siempre con antojo. Representa la pureza de nuestra cosecha,
+                la inocencia, el entusiasmo culinario y el amor por cada dulce hecho a mano.
+              </p>
+            </div>
+          </article>
+
+          <article
+            class="p-5 rounded-2xl bg-surface-container-low flex items-start gap-4 shadow-sm hover:bg-surface-container transition-colors"
+          >
+            <span
+              aria-hidden="true"
+              class="w-14 h-14 rounded-2xl bg-primary-container flex items-center justify-center shrink-0 shadow-sm text-on-primary font-headline-md font-bold"
+              >R</span
+            >
+            <div class="flex flex-col">
+              <div class="flex items-center gap-2">
+                <h3 class="font-headline-md text-headline-md text-secondary">Ranto</h3>
+                <span
+                  class="px-2.5 py-0.5 rounded-full bg-secondary-fixed font-label-sm text-label-sm text-on-secondary-fixed"
+                  >La Flor</span
+                >
+              </div>
+              <p class="font-body-sm text-body-sm text-on-surface-variant mt-1">
+                La flor que comparte nuestra tradición. Representa la fuerza del color púrpura, la
+                alegría comunitaria de compartir y la generosidad de la tierra mexicana.
+              </p>
+            </div>
+          </article>
+
+          <p class="p-4 rounded-2xl bg-surface-container-high/40 flex items-center gap-3 m-0">
+            <span aria-hidden="true" class="material-symbols-outlined text-secondary text-[24px]"
+              >favorite</span
+            >
+            <span class="font-body-sm text-body-sm text-on-surface">
+              <strong>Semilla + Flor = Nuestra Esencia.</strong> Juntos te acompañan en cada entrega
+              y en cada cajita de regalo.
+            </span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== EMBUDO WHATSAPP ===================== -->
+<section class="w-full py-space-2xl bg-surface">
+  <div class="max-w-5xl mx-auto px-margin lg:px-margin-desktop">
+    <div
+      class="relative rounded-3xl bg-primary-container text-on-primary p-space-lg sm:p-space-xl lg:p-space-2xl overflow-hidden shadow-2xl"
+    >
+      <div
+        aria-hidden="true"
+        class="absolute -top-24 -right-24 w-72 h-72 bg-secondary rounded-full blur-2xl opacity-60"
+      ></div>
+      <div
+        aria-hidden="true"
+        class="absolute -bottom-24 -left-24 w-72 h-72 bg-tertiary-container rounded-full blur-2xl opacity-70"
+      ></div>
+
+      <div class="relative z-10 flex flex-col items-center text-center max-w-2xl mx-auto">
+        <span
+          aria-hidden="true"
+          class="w-16 h-16 rounded-full bg-on-primary/10 flex items-center justify-center mb-4 backdrop-blur-sm"
+        >
+          <span class="material-symbols-outlined text-[36px] text-tertiary-fixed">chat_bubble</span>
+        </span>
+        <p class="font-label-sm text-label-sm uppercase tracking-widest text-primary-fixed mb-2">
+          Atención Inmediata &amp; Pedidos Especiales
+        </p>
+        <h2 class="font-headline-xl text-headline-xl text-on-primary mb-3 leading-tight">
+          ¿Se te antojó algo delicioso?
+        </h2>
+        <p class="font-body-lg text-body-lg text-primary-fixed-dim mb-space-lg max-w-lg">
+          Escríbenos directamente y descubre paquetes para mesas de dulces, eventos corporativos o
+          tus antojos de media tarde.
+        </p>
+
+        <a
+          class="min-h-16 py-3 px-8 rounded-full bg-surface text-primary font-headline-sm text-headline-sm flex items-center justify-center gap-3 shadow-xl hover:bg-tertiary-fixed hover:text-on-tertiary-fixed transform hover:scale-105 transition-all w-full sm:w-auto"
+          rel="noopener noreferrer"
+          target="_blank"
+          [href]="waAntojo"
+        >
+          <span aria-hidden="true" class="material-symbols-outlined text-[26px] text-secondary"
+            >forum</span
+          >
+          <span>Chatear por WhatsApp ({{ sitio.whatsapp.visible }})</span>
+        </a>
+
+        <ul
+          class="flex flex-wrap items-center justify-center gap-6 mt-space-lg text-primary-fixed font-label-sm text-label-sm list-none p-0"
+        >
+          <li class="flex items-center gap-1.5">
+            <span aria-hidden="true" class="material-symbols-outlined text-[18px]"
+              >verified_user</span
+            >
+            <span>Sin intermediarios</span>
+          </li>
+          <li class="flex items-center gap-1.5">
+            <span aria-hidden="true" class="material-symbols-outlined text-[18px]"
+              >local_shipping</span
+            >
+            <span>Envíos a todo México</span>
+          </li>
+          <li class="flex items-center gap-1.5">
+            <span aria-hidden="true" class="material-symbols-outlined text-[18px]"
+              >workspace_premium</span
+            >
+            <span>Atención cálida y personalizada</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>

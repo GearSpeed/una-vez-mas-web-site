@@ -1,0 +1,206 @@
+<main
+  class="relative w-full min-h-dvh py-space-xl lg:py-space-2xl px-margin overflow-hidden flex items-center justify-center bg-surface"
+>
+  <div
+    aria-hidden="true"
+    class="absolute -top-32 -left-32 w-96 h-96 rounded-full bg-primary-fixed-dim/20 blur-3xl pointer-events-none"
+  ></div>
+  <div
+    aria-hidden="true"
+    class="absolute -bottom-24 -right-24 w-[28rem] h-[28rem] rounded-full bg-tertiary-fixed/30 blur-3xl pointer-events-none"
+  ></div>
+
+  <div class="relative w-full max-w-xl mx-auto flex flex-col items-center">
+    <div
+      class="w-full bg-surface-container-lowest/90 backdrop-blur-md rounded-xl p-6 sm:p-10 shadow-[0_12px_36px_rgba(67,37,28,0.08)] flex flex-col items-center text-center"
+    >
+      <!-- Logo -->
+      <div class="relative flex items-center justify-center mb-6 w-fit mx-auto">
+        <div
+          class="w-28 h-28 rounded-full bg-surface-container-low flex items-center justify-center p-3 shadow-sm transition-transform duration-300 hover:scale-105"
+        >
+          <img
+            alt="Emblema de Una vez más: cráneo prehispánico con penacho de espigas de amaranto"
+            class="w-full h-full object-contain"
+            decoding="async"
+            fetchpriority="high"
+            height="497"
+            src="img/marca/logo.png"
+            width="512"
+          />
+        </div>
+        <span
+          class="absolute -bottom-2 -right-1 px-3 py-0.5 rounded-full bg-tertiary-fixed text-on-tertiary-fixed font-label-sm text-label-sm shadow-sm flex items-center gap-1"
+        >
+          <span
+            aria-hidden="true"
+            class="w-1.5 h-1.5 rounded-full bg-secondary animate-ping"
+          ></span>
+          En vivo
+        </span>
+      </div>
+
+      <!-- Encabezado -->
+      <div class="flex flex-col items-center mb-6">
+        <p
+          class="inline-flex items-center gap-2 mb-2 px-3 py-1 rounded-full bg-surface-container text-primary font-label-sm text-label-sm m-0"
+        >
+          <span aria-hidden="true" class="material-symbols-outlined text-[16px]">eco</span>
+          <span>Antojitos ancestrales</span>
+        </p>
+        <h1
+          class="font-display-lg text-headline-xl sm:text-display-lg text-primary tracking-tight leading-tight"
+        >
+          {{ sitio.nombre }}
+        </h1>
+        <p class="font-headline-sm text-body-lg text-on-surface-variant mt-1 max-w-md">
+          {{ sitio.descriptor }}
+        </p>
+        <p class="font-body-sm text-body-sm text-on-surface-variant/80 mt-3 max-w-sm">
+          ¡Qué gusto tenerte aquí! Descubre nuestros antojitos artesanales y acompáñanos en nuestras
+          redes.
+        </p>
+      </div>
+
+      <!-- Botones -->
+      <nav aria-label="Enlaces de Una vez más" class="w-full flex flex-col gap-3.5 mb-8">
+        @for (enlace of enlaces; track enlace.id) {
+          @switch (enlace.estilo) {
+            @case ('destacado') {
+              <a
+                class="group relative w-full min-h-[58px] px-5 py-3.5 rounded-full bg-primary-container hover:bg-secondary-container text-on-primary transition-all duration-300 shadow-[0_8px_20px_rgba(128,15,53,0.22)] transform hover:-translate-y-0.5 active:translate-y-0 flex items-center justify-between gap-2"
+                [routerLink]="enlace.ruta"
+              >
+                <span
+                  aria-hidden="true"
+                  class="w-9 h-9 rounded-full bg-on-primary/15 flex items-center justify-center shrink-0"
+                >
+                  <span class="material-symbols-outlined text-[20px]">{{ enlace.icono }}</span>
+                </span>
+                <span class="font-label-lg text-label-lg tracking-wide flex-1 text-center">
+                  {{ enlace.titulo }}
+                </span>
+                <span aria-hidden="true" class="w-9 h-9 flex items-center justify-center shrink-0">
+                  <span
+                    class="material-symbols-outlined text-[22px] transition-transform group-hover:translate-x-1"
+                  >
+                    arrow_forward
+                  </span>
+                </span>
+              </a>
+            }
+            @case ('whatsapp') {
+              <a
+                class="group relative w-full min-h-[58px] px-5 py-3.5 rounded-full bg-[#1da851] hover:bg-[#168a42] text-white transition-all duration-300 shadow-[0_8px_20px_rgba(29,168,81,0.24)] transform hover:-translate-y-0.5 active:translate-y-0 flex items-center justify-between gap-2"
+                rel="noopener noreferrer"
+                target="_blank"
+                [href]="href(enlace)"
+              >
+                <span
+                  aria-hidden="true"
+                  class="w-9 h-9 rounded-full bg-white/20 flex items-center justify-center shrink-0"
+                >
+                  <span class="material-symbols-outlined text-[22px]">{{ enlace.icono }}</span>
+                </span>
+                <span class="flex flex-col items-center flex-1">
+                  <span class="font-label-lg text-label-lg tracking-wide leading-tight">
+                    {{ enlace.titulo }}
+                  </span>
+                  @if (enlace.detalle) {
+                    <span class="font-label-sm text-[11px] text-white/90">{{
+                      enlace.detalle
+                    }}</span>
+                  }
+                </span>
+                <span aria-hidden="true" class="w-9 h-9 flex items-center justify-center shrink-0">
+                  <span
+                    class="material-symbols-outlined text-[20px] transition-transform group-hover:scale-110"
+                  >
+                    open_in_new
+                  </span>
+                </span>
+              </a>
+            }
+            @default {
+              <a
+                class="group w-full min-h-[54px] px-5 py-3 rounded-full bg-surface-container-low hover:bg-surface-container-high text-on-surface transition-all duration-200 transform hover:-translate-y-0.5 flex items-center justify-between gap-2"
+                [attr.rel]="externo(enlace) ? 'noopener noreferrer' : null"
+                [attr.target]="externo(enlace) ? '_blank' : null"
+                [href]="href(enlace)"
+              >
+                <span
+                  aria-hidden="true"
+                  [class]="
+                    'w-8 h-8 rounded-full bg-surface flex items-center justify-center shrink-0 ' +
+                    (enlace.iconoColor ?? 'text-primary')
+                  "
+                >
+                  <span class="material-symbols-outlined text-[19px]">{{ enlace.icono }}</span>
+                </span>
+                <span class="flex flex-col items-center flex-1 min-w-0">
+                  <span class="font-label-md text-label-md text-primary">{{ enlace.titulo }}</span>
+                  @if (enlace.detalle) {
+                    <span
+                      class="font-label-sm text-[11px] text-on-surface-variant truncate max-w-full"
+                    >
+                      {{ enlace.detalle }}
+                    </span>
+                  }
+                </span>
+                <span
+                  aria-hidden="true"
+                  class="material-symbols-outlined text-[18px] text-on-surface-variant group-hover:text-primary transition-colors shrink-0"
+                  >{{ enlace.id === 'correo' ? 'send' : 'chevron_right' }}</span
+                >
+              </a>
+            }
+          }
+        }
+      </nav>
+
+      <!-- Ami & Ranto -->
+      <div
+        class="w-full bg-surface-container-low rounded-lg p-5 flex flex-col items-center relative overflow-hidden"
+      >
+        <div
+          aria-hidden="true"
+          class="absolute -right-8 -bottom-8 w-32 h-32 bg-primary-fixed/30 rounded-full blur-xl pointer-events-none"
+        ></div>
+        <div class="w-full max-w-[320px] mb-3 flex items-center justify-center">
+          <img
+            alt="Ami y Ranto de Una vez más con sus canastas de dulces de amaranto"
+            class="w-full h-auto max-h-48 object-contain rounded-xl transition-transform duration-300 hover:scale-105"
+            decoding="async"
+            height="666"
+            loading="lazy"
+            src="img/mascotas/ami-ranto-canastas.jpg"
+            width="1000"
+          />
+        </div>
+        <p class="flex items-center gap-1.5 text-primary font-label-md text-label-md m-0">
+          <span>Deliciosos por naturaleza</span>
+          <span aria-hidden="true" class="text-secondary">♡</span>
+          <span>Hecho en México</span>
+        </p>
+        <p class="font-body-sm text-[12px] text-on-surface-variant/80 mt-1">
+          Con amor desde nuestras tierras de amaranto
+        </p>
+        <a
+          class="mt-4 inline-flex items-center gap-2 px-5 py-2 rounded-full bg-surface-container-lowest text-primary hover:text-on-primary hover:bg-primary transition-all duration-200 font-label-sm text-label-sm shadow-sm"
+          routerLink="/inicio"
+        >
+          <span aria-hidden="true" class="material-symbols-outlined text-[16px]">cottage</span>
+          <span>Visitar sitio web oficial</span>
+        </a>
+      </div>
+    </div>
+
+    <p
+      class="mt-6 flex items-center justify-center gap-2 text-on-surface-variant font-label-sm text-[12px]"
+    >
+      <span>{{ sitio.nombre }} © {{ anio }}</span>
+      <span aria-hidden="true">•</span>
+      <span>Tradición &amp; Alegría</span>
+    </p>
+  </div>
+</main>

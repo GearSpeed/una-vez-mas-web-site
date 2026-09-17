@@ -1,0 +1,35 @@
+[
+  {
+    "categoria": "Galletas",
+    "titulo": "Galletas Artesanales",
+    "insignia": "Horneado Diario",
+    "insigniaIcono": "cookie",
+    "tono": "primary",
+    "descripcion": "Avena, Chocolate, Coco y Nuez. Horneadas a fuego lento para lograr esa textura crocante y suave al mismo tiempo.",
+    "imagen": "categorias/galletas.jpg",
+    "alt": "Galletas artesanales mexicanas de amaranto, avena, coco y chocolate en platos de cerámica rústica.",
+    "cta": "Ver delicias horneadas"
+  },
+  {
+    "categoria": "Borrachitos",
+    "titulo": "Borrachitos Finos",
+    "insignia": "Tradición Poblana",
+    "insigniaIcono": "local_bar",
+    "tono": "secondary",
+    "descripcion": "Golosina típica embalsamada en licor suave: Tequila, Ron, Baileys y tradicionales de frutas para deleitar el paladar.",
+    "imagen": "categorias/borrachitos.jpg",
+    "alt": "Borrachitos tradicionales mexicanos cubiertos de azúcar glass servidos en loza de madera.",
+    "cta": "Explorar licores dulces"
+  },
+  {
+    "categoria": "Alegrías",
+    "titulo": "Alegrías de Amaranto",
+    "insignia": "Herencia Prehispánica",
+    "insigniaIcono": "grain",
+    "tono": "tertiary",
+    "descripcion": "Las clásicas barras doradas de amaranto tostado, ligadas con miel de piloncillo, pasas y semillas selectas de calabaza y nuez.",
+    "imagen": "categorias/alegrias.jpg",
+    "alt": "Barras de alegría de amaranto reventado con miel de piloncillo, pepitas, cacahuate y pasas.",
+    "cta": "Ver variedades de alegría"
+  }
+]

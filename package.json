@@ -4,10 +4,11 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "prebuild": "node scripts/generar-sitemap.mjs",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:una_vez_mas_web_site": "node dist/una_vez_mas_web_site/server/server.mjs"
+    "sitemap": "node scripts/generar-sitemap.mjs"
   },
   "private": true,
   "packageManager": "npm@11.12.1",

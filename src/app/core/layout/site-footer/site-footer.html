@@ -1,0 +1,122 @@
+<footer class="w-full bg-surface-container-low text-on-surface pt-space-2xl pb-space-xl">
+  <div class="max-w-7xl mx-auto px-margin lg:px-margin-desktop">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-space-lg mb-space-2xl">
+      <!-- Marca -->
+      <div class="lg:col-span-4 flex flex-col items-start gap-3">
+        <div class="flex items-center gap-3">
+          <img
+            alt="Emblema de Una vez más"
+            class="h-12 w-auto object-contain"
+            height="497"
+            loading="lazy"
+            src="img/marca/logo.png"
+            width="512"
+          />
+          <div class="flex flex-col">
+            <span class="font-headline-sm text-headline-sm text-primary tracking-tight">
+              {{ sitio.nombre }}
+            </span>
+            <span class="font-label-sm text-label-sm text-on-surface-variant">
+              {{ sitio.descriptor }}
+            </span>
+          </div>
+        </div>
+        <p class="font-body-md text-body-md text-on-surface-variant max-w-sm mt-2">
+          Antojitos ancestrales · Deliciosos por naturaleza. Transformamos el amaranto mexicano con
+          miel de campo, cacao y pasión artesanal.
+        </p>
+        <div
+          class="inline-flex items-center gap-2 mt-2 px-3 py-1.5 rounded-full bg-surface-container text-primary font-label-sm text-label-sm"
+        >
+          <span aria-hidden="true" class="material-symbols-outlined text-[16px]">eco</span>
+          <span>Hecho a mano en México · Ami &amp; Ranto</span>
+        </div>
+      </div>
+
+      <!-- Navegación -->
+      <div class="lg:col-span-3 flex flex-col gap-3">
+        <h2 class="font-label-lg text-label-lg text-primary tracking-wide">Navegación</h2>
+        <nav aria-label="Navegación del pie" class="flex flex-col gap-2">
+          @for (item of nav; track item.ruta) {
+            <a
+              class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors w-fit"
+              [routerLink]="item.ruta"
+              >{{ item.texto }}</a
+            >
+          }
+        </nav>
+      </div>
+
+      <!-- Atención -->
+      <div class="lg:col-span-3 flex flex-col gap-3">
+        <h2 class="font-label-lg text-label-lg text-primary tracking-wide">
+          Atención &amp; Pedidos
+        </h2>
+        <div class="flex flex-col gap-2.5 font-body-sm text-body-sm text-on-surface-variant">
+          <a
+            class="flex items-center gap-2 hover:text-primary transition-colors w-fit"
+            rel="noopener noreferrer"
+            target="_blank"
+            [href]="waDirecto"
+          >
+            <span aria-hidden="true" class="material-symbols-outlined text-primary text-[18px]"
+              >call</span
+            >
+            <span>{{ sitio.whatsapp.visible }}</span>
+          </a>
+          <a
+            class="flex items-center gap-2 hover:text-primary transition-colors w-fit"
+            [href]="'mailto:' + sitio.correo"
+          >
+            <span aria-hidden="true" class="material-symbols-outlined text-primary text-[18px]"
+              >mail</span
+            >
+            <span>{{ sitio.correo }}</span>
+          </a>
+          <p class="flex items-center gap-2">
+            <span aria-hidden="true" class="material-symbols-outlined text-primary text-[18px]">
+              schedule
+            </span>
+            <span>{{ sitio.horario }}</span>
+          </p>
+        </div>
+      </div>
+
+      <!-- Comunidad -->
+      <div class="lg:col-span-2 flex flex-col gap-3">
+        <h2 class="font-label-lg text-label-lg text-primary tracking-wide">Comunidad</h2>
+        <div class="flex flex-col gap-2 font-body-sm text-body-sm text-on-surface-variant">
+          @for (red of sitio.redes; track red.id) {
+            <a
+              class="hover:text-primary transition-colors w-fit"
+              rel="noopener noreferrer"
+              target="_blank"
+              [href]="red.url"
+              >{{ red.nombre }} {{ red.usuario }}</a
+            >
+          }
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="pt-space-lg flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left bg-surface-container/60 p-6 rounded-3xl"
+    >
+      <p class="font-body-sm text-body-sm text-on-surface-variant">
+        © {{ anio }} {{ sitio.nombre }}. Todos los derechos reservados. Antojos artesanales
+        elaborados con amor.
+      </p>
+      <!-- El maquetado tenía aquí un "Aviso de Privacidad" que apuntaba a /enlaces.
+           Se retira hasta que exista la página real: un enlace legal que no lleva
+           al aviso es peor que no tenerlo. -->
+      <div class="flex items-center gap-4">
+        <a
+          class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors"
+          routerLink="/contacto"
+          fragment="faq"
+          >Preguntas Frecuentes</a
+        >
+      </div>
+    </div>
+  </div>
+</footer>

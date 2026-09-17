@@ -1,0 +1,63 @@
+[
+  {
+    "id": "catalogo",
+    "titulo": "Ver nuestro catálogo",
+    "detalle": null,
+    "icono": "menu_book",
+    "ruta": "/catalogo",
+    "estilo": "destacado"
+  },
+  {
+    "id": "whatsapp",
+    "titulo": "Pedir por WhatsApp",
+    "detalle": "Atención directa e inmediata",
+    "icono": "chat",
+    "waTexto": "Hola, vengo desde sus redes sociales y me gustaría hacer un pedido",
+    "estilo": "whatsapp"
+  },
+  {
+    "id": "tiktok",
+    "titulo": "TikTok",
+    "detalle": "@unavezmasmx · Recetas y sonrisas",
+    "icono": "music_note",
+    "url": "https://tiktok.com/@unavezmasmx",
+    "estilo": "normal",
+    "iconoColor": "text-primary"
+  },
+  {
+    "id": "instagram",
+    "titulo": "Instagram",
+    "detalle": "@unavezmas.mx · Galería de antojitos",
+    "icono": "photo_camera",
+    "url": "https://instagram.com/unavezmas.mx",
+    "estilo": "normal",
+    "iconoColor": "text-secondary"
+  },
+  {
+    "id": "youtube",
+    "titulo": "YouTube",
+    "detalle": "@unavezmasmx · Procesos y tradición",
+    "icono": "play_circle",
+    "url": "https://youtube.com/@unavezmasmx",
+    "estilo": "normal",
+    "iconoColor": "text-error"
+  },
+  {
+    "id": "facebook",
+    "titulo": "Facebook",
+    "detalle": "Una vez más · Comunidad y eventos",
+    "icono": "groups",
+    "url": "https://facebook.com",
+    "estilo": "normal",
+    "iconoColor": "text-primary"
+  },
+  {
+    "id": "correo",
+    "titulo": "Contacto por correo",
+    "detalle": "contactanos@unavezmasmx.com",
+    "icono": "mail",
+    "url": "mailto:contactanos@unavezmasmx.com",
+    "estilo": "normal",
+    "iconoColor": "text-on-tertiary-fixed-variant"
+  }
+]

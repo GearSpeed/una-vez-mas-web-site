@@ -1,59 +1,94 @@
-# UnaVezMasWebSite
+# Una vez más — sitio web
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.1.
+Embudo de ventas de **Una vez más**, productos artesanales de amaranto (alegrías, galletas y
+borrachitos). Angular 21, sólo front end: no hay backend y el "checkout" es WhatsApp con el
+mensaje precargado. El sitio se compila a **HTML estático prerenderizado**, listo para publicar
+en Netlify, Firebase Hosting, Vercel o GitHub Pages.
 
-## Development server
+Portado del maquetado de Google Stitch que vive en
+`Descargas/Una Vez Mas/sitio web/stitch_sitio_web_una_vez_m_s`.
 
-To start a local development server, run:
-
-```bash
-ng serve
-```
-
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## Correr y compilar
 
 ```bash
-ng generate component component-name
+npm start          # http://localhost:4200
+npm run build      # genera dist/una_vez_mas_web_site/browser (15 HTML estáticos)
+npm test           # Vitest
+npm run sitemap    # regenera public/sitemap.xml (el build ya lo hace solo)
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+`npm run build` no necesita servidor de Node: `outputMode: static` en `angular.json` deja HTML
+plano. Se sube la carpeta `dist/una_vez_mas_web_site/browser` tal cual.
 
-```bash
-ng generate --help
+## Editar el contenido
+
+Todo el texto, los productos y los datos de contacto están en **`src/app/content/`**. No hace
+falta tocar componentes.
+
+| Archivo         | Qué controla                                                                                       |
+| --------------- | -------------------------------------------------------------------------------------------------- |
+| `products.json` | Los 9 productos del catálogo: nombre, descripción, ingredientes, imagen, **precio** y presentación |
+| `featured.json` | Los 4 "Favoritos de la Casa" de Inicio (referencian un producto por `productoId`)                  |
+| `showcase.json` | Las 3 tarjetas de categoría de Inicio                                                              |
+| `faq.json`      | Las preguntas frecuentes de Contacto                                                               |
+| `links.json`    | Los botones del link-in-bio de `/enlaces`                                                          |
+| `site.json`     | WhatsApp, correo, horario, redes y textos de marca                                                 |
+
+### Poner precios
+
+En `products.json`, `precio` está en `null` y se muestra como **«Consulta precio»**. Para
+publicar precios:
+
+```json
+"precio": 65,
+"presentacion": "Paquete x 5 pzas"
 ```
 
-## Building
+Luego `npm run build` y subir. Los JSON se compilan dentro del bundle y se validan contra los
+tipos de `src/app/core/models/`: **si falta un campo o el tipo no cuadra, el build falla** en vez
+de romperse en producción.
 
-To build the project run:
+> Si más adelante quieres cambiar precios sin recompilar, mueve `products.json` a
+> `public/content/` y léelo con `HttpClient`. El único archivo a tocar es
+> `src/app/core/services/catalog.ts`, que es la puerta única a los datos.
 
-```bash
-ng build
+## Estructura
+
+```
+src/app/
+├─ content/     los JSON de arriba + index.ts (carga tipada y validada)
+├─ core/
+│  ├─ layout/   shell, header (con drawer móvil), footer, dock de WhatsApp
+│  ├─ models/   Producto, Destacado, Vitrina, Sitio, Faq, Enlace
+│  └─ services/ catalog, whatsapp, seo, scroll-lock
+└─ pages/       inicio, catalogo (+ producto-modal), nosotros, contacto, enlaces, no-encontrada
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+Rutas: `/inicio`, `/catalogo`, `/catalogo/:slug`, `/nosotros`, `/contacto` van dentro del shell.
+`/enlaces` va **fuera** (es el link-in-bio de Instagram y TikTok, sin header ni footer).
+`/catalogo/:slug` abre el detalle sobre la grilla como ruta hija: el enlace se puede compartir y
+cada producto queda como HTML indexable.
 
-## Running unit tests
+## Design system
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+Los tokens del design system "Herencia y Alegría Artesanal" están en el bloque `@theme` de
+`src/styles.css` (Tailwind v4). Son los mismos que el maquetado: `bg-primary-container`,
+`font-body-md`, `text-headline-xl`, `px-margin`, `py-space-2xl`, etc.
 
-```bash
-ng test
-```
+⚠️ **Ojo con `DESIGN.md`**: su prosa nombra una paleta (`#800F35`, `#C91C59`, `#E8AD52`) distinta
+a la de su frontmatter, y lo que manda es el **frontmatter**. Los hex de la prosa corresponden a
+los tonos `*-container`; salieron de los colores reales del logo.
 
-## Running end-to-end tests
+## Pendientes
 
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+- **Ilustraciones de Ami y Ranto**: las tarjetas de `/nosotros` usan los retratos que generó
+  Stitch, que no siguen el estilo plano oficial de los personajes. Hacen falta recortes limpios
+  de `Imágenes/Ami_diseño.png` y `Ranto_diseño.png` (el fondo del pliego tiene textura y no se
+  recorta bien por programa).
+- **Aviso de privacidad**: el maquetado tenía el enlace en el footer apuntando a `/enlaces`. Se
+  retiró hasta que exista la página real.
+- **Fotografía de producto**: las 20 imágenes son las que generó la IA de Stitch. Al haber foto
+  real de los productos, se reemplazan en `public/img/` con el mismo nombre.
+- **Precios y presentaciones** de los 9 productos.
+- Revisar el mapeo de `featured.json` → `products.json` (los 4 destacados de Inicio usan otros
+  nombres y precios que el catálogo, tal como venía el maquetado).

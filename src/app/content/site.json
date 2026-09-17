@@ -1,0 +1,45 @@
+{
+  "nombre": "Una vez más",
+  "lema": "Amaranto & algo más",
+  "descriptor": "Productos de amaranto y algo más",
+  "claim": "Antojitos ancestrales · Deliciosos por naturaleza",
+  "dominio": "www.unavezmasmx.com",
+  "url": "https://www.unavezmasmx.com",
+  "whatsapp": { "numero": "525526604734", "visible": "+52 55 2660 4734" },
+  "correo": "contactanos@unavezmasmx.com",
+  "horario": "Lun - Sáb: 9:00 AM - 7:00 PM",
+  "redes": [
+    {
+      "id": "instagram",
+      "nombre": "Instagram",
+      "usuario": "@unavezmas.mx",
+      "url": "https://instagram.com/unavezmas.mx",
+      "icono": "photo_camera",
+      "tema": "Fotografía & Antojos"
+    },
+    {
+      "id": "tiktok",
+      "nombre": "TikTok",
+      "usuario": "@unavezmasmx",
+      "url": "https://tiktok.com/@unavezmasmx",
+      "icono": "smart_display",
+      "tema": "Videos Cortos & Humor"
+    },
+    {
+      "id": "youtube",
+      "nombre": "YouTube",
+      "usuario": "@unavezmasmx",
+      "url": "https://youtube.com/@unavezmasmx",
+      "icono": "play_circle",
+      "tema": "Historias & Cosecha"
+    },
+    {
+      "id": "facebook",
+      "nombre": "Facebook",
+      "usuario": "Una vez más",
+      "url": "https://facebook.com",
+      "icono": "share",
+      "tema": "Comunidad & Avisos"
+    }
+  ]
+}

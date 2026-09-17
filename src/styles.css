@@ -1,3 +1,226 @@
-/* You can add global styles to this file, and also import other style files */
+/* =============================================================================
+   Una vez más — estilos globales
+   Los tokens salen del design system "Herencia y Alegría Artesanal" (DESIGN.md).
+   Ojo: manda el frontmatter de DESIGN.md, no la paleta de su prosa — ver README.
+   ============================================================================= */
 
 @import 'tailwindcss';
+
+@theme {
+  /* ---- Color · tokens Material 3 de DESIGN.md ---- */
+  --color-background: #fff8f6;
+  --color-error: #ba1a1a;
+  --color-error-container: #ffdad6;
+  --color-inverse-on-surface: #ffede8;
+  --color-inverse-primary: #ffb2be;
+  --color-inverse-surface: #47281f;
+  --color-on-background: #2f140c;
+  --color-on-error: #ffffff;
+  --color-on-error-container: #93000a;
+  --color-on-primary: #ffffff;
+  --color-on-primary-container: #ff88a0;
+  --color-on-primary-fixed: #3f0015;
+  --color-on-primary-fixed-variant: #89173b;
+  --color-on-secondary: #ffffff;
+  --color-on-secondary-container: #fffbff;
+  --color-on-secondary-fixed: #3f0016;
+  --color-on-secondary-fixed-variant: #90003b;
+  --color-on-surface: #2f140c;
+  --color-on-surface-variant: #574144;
+  --color-on-tertiary: #ffffff;
+  --color-on-tertiary-container: #dba248;
+  --color-on-tertiary-fixed: #291800;
+  --color-on-tertiary-fixed-variant: #624000;
+  --color-outline: #8a7174;
+  --color-outline-variant: #ddbfc3;
+  --color-primary: #5b0021;
+  --color-primary-container: #800f35;
+  --color-primary-fixed: #ffd9de;
+  --color-primary-fixed-dim: #ffb2be;
+  --color-secondary: #b7034d;
+  --color-secondary-container: #da2c65;
+  --color-secondary-fixed: #ffd9de;
+  --color-secondary-fixed-dim: #ffb2bf;
+  --color-surface: #fff8f6;
+  --color-surface-bright: #fff8f6;
+  --color-surface-container: #ffe9e4;
+  --color-surface-container-high: #ffe2da;
+  --color-surface-container-highest: #ffdbd1;
+  --color-surface-container-low: #fff1ed;
+  --color-surface-container-lowest: #ffffff;
+  --color-surface-dim: #ffcfc2;
+  --color-surface-tint: #a93152;
+  --color-surface-variant: #ffdbd1;
+  --color-tertiary: #3c2600;
+  --color-tertiary-container: #593a00;
+  --color-tertiary-fixed: #ffddb1;
+  --color-tertiary-fixed-dim: #f9bc5f;
+
+  /* ---- Tipografía ---- */
+  --font-label-md: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-headline-sm: 'Outfit', ui-sans-serif, system-ui, sans-serif;
+  --font-label-sm: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-body-sm: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-body-lg: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-body-md: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-headline-md: 'Outfit', ui-sans-serif, system-ui, sans-serif;
+  --font-display-lg: 'Outfit', ui-sans-serif, system-ui, sans-serif;
+  --font-headline-xl-mobile: 'Outfit', ui-sans-serif, system-ui, sans-serif;
+  --font-headline-xl: 'Outfit', ui-sans-serif, system-ui, sans-serif;
+  --font-headline-lg: 'Outfit', ui-sans-serif, system-ui, sans-serif;
+  --font-label-lg: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+
+  --text-label-md: 0.875rem;
+  --text-label-md--line-height: 1.25;
+  --text-label-md--font-weight: 600;
+  --text-headline-sm: 1.25rem;
+  --text-headline-sm--line-height: 1.4;
+  --text-headline-sm--font-weight: 600;
+  --text-label-sm: 0.75rem;
+  --text-label-sm--line-height: 1.2;
+  --text-label-sm--font-weight: 600;
+  --text-body-sm: 0.875rem;
+  --text-body-sm--line-height: 1.5;
+  --text-body-sm--font-weight: 400;
+  --text-body-lg: 1.125rem;
+  --text-body-lg--line-height: 1.6;
+  --text-body-lg--font-weight: 400;
+  --text-body-md: 1rem;
+  --text-body-md--line-height: 1.55;
+  --text-body-md--font-weight: 400;
+  --text-headline-md: 1.5rem;
+  --text-headline-md--line-height: 1.35;
+  --text-headline-md--font-weight: 600;
+  --text-display-lg: 3.5rem;
+  --text-display-lg--line-height: 1.15;
+  --text-display-lg--letter-spacing: -0.02em;
+  --text-display-lg--font-weight: 700;
+  --text-headline-xl-mobile: 2rem;
+  --text-headline-xl-mobile--line-height: 1.25;
+  --text-headline-xl-mobile--letter-spacing: -0.01em;
+  --text-headline-xl-mobile--font-weight: 700;
+  --text-headline-xl: 2.5rem;
+  --text-headline-xl--line-height: 1.2;
+  --text-headline-xl--letter-spacing: -0.015em;
+  --text-headline-xl--font-weight: 700;
+  --text-headline-lg: 1.875rem;
+  --text-headline-lg--line-height: 1.3;
+  --text-headline-lg--font-weight: 600;
+  --text-label-lg: 1rem;
+  --text-label-lg--line-height: 1.25;
+  --text-label-lg--letter-spacing: 0.01em;
+  --text-label-lg--font-weight: 700;
+
+  /* ---- Radios (cápsula) ---- */
+  --radius: 1rem;
+  --radius-lg: 2rem;
+  --radius-xl: 3rem;
+  --radius-full: 9999px;
+
+  /* ---- Espaciado con nombre ---- */
+  --spacing-gutter: 1.25rem;
+  --spacing-gutter-desktop: 2rem;
+  --spacing-margin: 1.25rem;
+  --spacing-margin-desktop: 3rem;
+  --spacing-space-2xl: 4rem;
+  --spacing-space-lg: 1.5rem;
+  --spacing-space-md: 1rem;
+  --spacing-space-sm: 0.5rem;
+  --spacing-space-xl: 2.5rem;
+  --spacing-space-xs: 0.25rem;
+}
+
+/* -----------------------------------------------------------------------------
+   Base
+   -------------------------------------------------------------------------- */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    /* el header fijo mide 5rem: que los anclajes no queden debajo */
+    scroll-padding-top: 5rem;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    overscroll-behavior-y: none;
+    background-color: var(--color-surface);
+    color: var(--color-on-surface);
+    font-family: var(--font-body-md);
+    font-size: var(--text-body-md);
+    line-height: var(--text-body-md--line-height);
+  }
+
+  /* el maquetado depende de que las secciones no arrastren margen en los bordes */
+  main > :first-child {
+    margin-top: 0 !important;
+  }
+  main > :last-child {
+    margin-bottom: 0 !important;
+  }
+
+  ::selection {
+    background-color: var(--color-primary-fixed);
+    color: var(--color-on-primary-fixed);
+  }
+
+  /* respeta a quien pide menos movimiento */
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+/* -----------------------------------------------------------------------------
+   Material Symbols
+   -------------------------------------------------------------------------- */
+@layer components {
+  .material-symbols-outlined {
+    font-family: 'Material Symbols Outlined', sans-serif;
+    font-weight: normal;
+    font-style: normal;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+    font-variation-settings:
+      'FILL' 0,
+      'wght' 400;
+    -webkit-font-feature-settings: 'liga';
+    -webkit-font-smoothing: antialiased;
+    user-select: none;
+  }
+
+  /* reemplaza los style="font-variation-settings: 'FILL' 1" del export */
+  .material-symbols-outlined.is-filled {
+    font-variation-settings:
+      'FILL' 1,
+      'wght' 400;
+  }
+}
+
+/* -----------------------------------------------------------------------------
+   Utilidades
+   -------------------------------------------------------------------------- */
+
+/* El export escondía TODAS las barras de scroll con ::-webkit-scrollbar. Eso deja
+   al visitante sin referencia en páginas largas, así que aquí es opt-in: se usa
+   sólo en las tiras que se desplazan en horizontal (los filtros del catálogo). */
+@utility scrollbar-none {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}

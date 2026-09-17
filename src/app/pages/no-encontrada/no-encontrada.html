@@ -1,0 +1,46 @@
+<section
+  class="w-full min-h-[70vh] flex items-center justify-center px-margin lg:px-margin-desktop py-space-2xl bg-surface"
+>
+  <div class="max-w-xl mx-auto text-center flex flex-col items-center">
+    <img
+      alt="Ami y Ranto buscando entre las espigas de amaranto"
+      class="w-40 h-40 object-contain mb-space-md"
+      height="497"
+      src="img/marca/logo.png"
+      width="512"
+    />
+    <p
+      class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-surface-container-high text-primary font-label-sm text-label-sm mb-4 m-0"
+    >
+      <span aria-hidden="true" class="material-symbols-outlined text-[18px]">search_off</span>
+      <span>Error 404</span>
+    </p>
+    <h1 class="font-headline-xl text-headline-xl text-primary tracking-tight mb-3">
+      Aquí no hay antojitos
+    </h1>
+    <p class="font-body-lg text-body-lg text-on-surface-variant mb-space-lg">
+      La página que buscas cambió de lugar o ya no existe. Ami y Ranto te llevan de vuelta a lo
+      bueno.
+    </p>
+    <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 w-full sm:w-auto">
+      <a
+        class="min-h-[52px] py-3 px-8 rounded-full bg-primary-container text-on-primary font-label-lg text-label-lg flex items-center justify-center gap-2 shadow-lg hover:bg-secondary-container transition-all"
+        routerLink="/catalogo"
+      >
+        <span aria-hidden="true" class="material-symbols-outlined text-[20px]">menu_book</span>
+        <span>Ver el catálogo</span>
+      </a>
+      <a
+        class="min-h-[52px] py-3 px-6 rounded-full bg-surface-container-lowest text-primary font-label-lg text-label-lg flex items-center justify-center gap-2.5 shadow-sm hover:bg-surface-container-high transition-all"
+        rel="noopener noreferrer"
+        target="_blank"
+        [href]="wa"
+      >
+        <span aria-hidden="true" class="material-symbols-outlined text-secondary text-[22px]"
+          >chat</span
+        >
+        <span>Escribirnos por WhatsApp</span>
+      </a>
+    </div>
+  </div>
+</section>

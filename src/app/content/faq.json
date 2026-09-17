@@ -1,0 +1,24 @@
+[
+  {
+    "id": 1,
+    "pregunta": "¿Cómo realizo un pedido?",
+    "respuesta": [
+      "Escríbenos directamente por WhatsApp con los productos de tu preferencia y te atenderemos de inmediato. Acordamos el modo de entrega, cantidades y te enviamos confirmación al instante sin registros complicados."
+    ]
+  },
+  {
+    "id": 2,
+    "pregunta": "¿Hacen entregas o pedidos especiales para eventos?",
+    "respuesta": [
+      "¡Sí! Elaboramos charolas, canastitas de degustación y recuerditos artesanales para bodas, aniversarios o eventos corporativos. Consulta disponibilidad y pedidos al mayoreo o eventos por WhatsApp."
+    ]
+  },
+  {
+    "id": 3,
+    "pregunta": "¿Dónde puedo ver todos los productos?",
+    "respuesta": [
+      "En nuestra sección de Catálogo encontrarás todas las galletas, borrachitos y alegrías tradicionales detalladas con sus ingredientes y presentaciones."
+    ],
+    "enlaceCatalogo": "Explorar el Catálogo de Delicias"
+  }
+]
