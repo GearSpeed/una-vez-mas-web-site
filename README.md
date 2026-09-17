@@ -79,6 +79,40 @@ Los tokens del design system "Herencia y Alegría Artesanal" están en el bloque
 a la de su frontmatter, y lo que manda es el **frontmatter**. Los hex de la prosa corresponden a
 los tonos `*-container`; salieron de los colores reales del logo.
 
+## Desplegar
+
+El sitio vive en **Cloudflare Pages**, conectado a este repo: cada `git push` a `main` publica solo.
+
+**Ajustes del proyecto en Cloudflare** (Workers & Pages -> el proyecto -> Settings -> Build):
+
+| Campo                  | Valor                               |
+| ---------------------- | ----------------------------------- |
+| Framework preset       | None                                |
+| Build command          | `npm run build`                     |
+| Build output directory | `dist/una_vez_mas_web_site/browser` |
+| Root directory         | `/`                                 |
+
+La versión de Node la fija `.node-version` (22.12.0, que es lo que pide Angular 21). El build
+corre `prebuild` (regenera `sitemap.xml`) y `postbuild` (crea `404.html`) sin que haya que
+configurar nada más.
+
+**Dominio**: la dirección canónica es `www.unavezmasmx.com` — es la que emiten las etiquetas
+`canonical`, Open Graph y el `sitemap.xml`, y sale de `url` en `site.json`. Si algún día cambia el
+dominio, se cambia ahí y se regenera. El apex `unavezmasmx.com` redirige a `www` con una Redirect
+Rule en Cloudflare.
+
+**Archivos que sólo existen para el despliegue**:
+
+- `public/_headers` — cabeceras de seguridad y de caché. Los bundles llevan hash en el nombre, así
+  que van `immutable`; las imágenes se cachean una semana con `stale-while-revalidate`, para que al
+  reemplazar una foto de producto no tarde en verse. El HTML lo revalida Cloudflare por omisión.
+- `scripts/post-build.mjs` — copia `index.csr.html` a `404.html`. Cloudflare sirve ese archivo en
+  las rutas que no existen: la URL responde 404 de verdad (lo correcto para buscadores) y el router
+  de Angular muestra nuestra página de 404 en lugar de la genérica de Cloudflare.
+
+Para publicar a mano sin pasar por GitHub: `npm run build` y subir la carpeta de salida, o
+`npx wrangler pages deploy dist/una_vez_mas_web_site/browser` si tienes `wrangler` autenticado.
+
 ## Pendientes
 
 - **Ilustraciones de Ami y Ranto**: las tarjetas de `/nosotros` usan los retratos que generó
