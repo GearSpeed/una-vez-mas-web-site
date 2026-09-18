@@ -20,6 +20,13 @@ export class Inicio {
   protected readonly vitrinas = this.catalogo.vitrinas;
   protected readonly destacados = this.catalogo.destacados;
 
+  /**
+   * Las métricas de la sección del amaranto salen del catálogo, no de números
+   * escritos a mano: así no envejecen cuando se agreguen o quiten productos.
+   */
+  protected readonly totalProductos = this.catalogo.productos.length;
+  protected readonly totalFamilias = this.catalogo.vitrinas.length;
+
   protected readonly waProductos = this.wa.enlace(
     'Hola, me gustaría conocer más sobre sus productos',
   );

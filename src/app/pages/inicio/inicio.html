@@ -39,8 +39,8 @@
         </div>
 
         <p class="font-body-lg text-body-lg text-on-surface-variant max-w-xl">
-          Traemos a tu mesa los antojitos de siempre: amaranto, miel y tradición mexicana, elegidos
-          uno por uno para que compartir vuelva a saber a lo de antes.
+          Traemos a tu mesa los antojitos de siempre: amaranto, piloncillo y tradición mexicana,
+          elegidos uno por uno para que compartir vuelva a saber a lo de antes.
         </p>
 
         <!-- CTAs -->
@@ -76,7 +76,7 @@
               >spa</span
             >
             <span class="font-label-sm text-label-sm text-primary">100% Mexicano</span>
-            <span class="font-body-sm text-body-sm text-on-surface-variant">Siembra local</span>
+            <span class="font-body-sm text-body-sm text-on-surface-variant">Dulce de aquí</span>
           </li>
           <li class="p-3 rounded-2xl bg-surface-container-lowest/90 shadow-sm flex flex-col gap-1">
             <span aria-hidden="true" class="material-symbols-outlined text-secondary text-[22px]"
@@ -90,12 +90,12 @@
               aria-hidden="true"
               class="material-symbols-outlined text-on-tertiary-fixed-variant text-[22px]"
             >
-              favorite
+              grain
             </span>
             <span class="font-label-sm text-label-sm text-on-tertiary-fixed-variant"
-              >Hecho con miel</span
+              >Con amaranto</span
             >
-            <span class="font-body-sm text-body-sm text-on-surface-variant">Endulzado fiel</span>
+            <span class="font-body-sm text-body-sm text-on-surface-variant">En cada bocado</span>
           </li>
         </ul>
       </div>
@@ -360,8 +360,8 @@
           </p>
           <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
             En <strong class="text-primary font-semibold">{{ sitio.nombre }}</strong> buscamos ese
-            sabor de siempre: amaranto tostado, miel y piloncillo, como se ha comido en México desde
-            mucho antes de que existieran las dulcerías.
+            sabor de siempre: amaranto tostado y miel de piloncillo, como se ha comido en México
+            desde mucho antes de que existieran las dulcerías.
           </p>
 
           <ul class="grid grid-cols-2 sm:grid-cols-3 gap-4 pt-4 list-none p-0 m-0">
@@ -372,9 +372,11 @@
               </span>
             </li>
             <li class="p-3.5 rounded-2xl bg-surface-container-lowest/80 shadow-sm flex flex-col">
-              <span class="font-headline-md text-headline-md text-secondary font-bold">100%</span>
+              <span class="font-headline-md text-headline-md text-secondary font-bold">
+                {{ totalFamilias }}
+              </span>
               <span class="font-body-sm text-body-sm text-on-surface-variant">
-                Origen campesino local
+                Familias de dulces por descubrir
               </span>
             </li>
             <li
@@ -382,10 +384,10 @@
             >
               <span
                 class="font-headline-md text-headline-md text-on-tertiary-fixed-variant font-bold"
-                >0%</span
+                >{{ totalProductos }}</span
               >
               <span class="font-body-sm text-body-sm text-on-surface-variant">
-                Jarabe artificial o aditivos
+                Antojitos en el catálogo
               </span>
             </li>
           </ul>

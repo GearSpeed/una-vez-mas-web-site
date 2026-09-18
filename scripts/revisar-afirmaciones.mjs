@@ -28,19 +28,25 @@ const PROHIBIDAS = [
   /sin intermediarios/i,
   /producci[oó]n 100%/i,
   /nuestra cosecha/i,
+
+  // Descartadas al confirmar con el proveedor (producción industrial, endulzado
+  // con piloncillo y no con miel de abeja):
+  /al 70%/i,
+  /miel de campo/i,
+  /flor silvestre/i,
+  /miel (pura |virgen )?de abeja/i,
+  /siembra (local|limpia)/i,
+  /origen campesino/i,
+  /jarabe artificial/i,
+  /sin conservadores/i,
+  /hecho fresco/i,
 ];
 
-/** Ciertas o no según la ficha del proveedor: sólo avisa. */
-const POR_CONFIRMAR = [
-  /miel de campo[^.<]{0,25}pura/i,
-  /al 70%/i,
-  /100% Mexicano/i,
-  /Siembra local/i,
-  /Origen campesino local/i,
-  /Jarabe artificial/i,
-  /Hecho fresco bajo pedido/i,
-  /Hecho con miel/i,
-];
+/**
+ * Vigiladas: no son falsas, pero conviene verlas si alguien las mueve.
+ * "100% Mexicano" está confirmada como verdadera y por eso no aparece aquí.
+ */
+const POR_CONFIRMAR = [/\bmiel\b(?!\s+(de\s+)?piloncillo)/i];
 
 const raiz = process.argv[2] === 'dist' ? 'dist/una_vez_mas_web_site/browser' : 'src';
 const EXT = process.argv[2] === 'dist' ? ['.html'] : ['.html', '.ts', '.json'];

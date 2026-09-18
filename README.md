@@ -90,15 +90,19 @@ La voz es **"nosotros lo escogemos"**, no "nosotros lo hacemos": escogemos, sele
 traemos, armamos (las charolas y canastitas sí las armamos). "Elegidos uno por uno" y "escogido
 a mano" conservan la calidez sin mentir.
 
-Afirmaciones que siguen en el sitio y **están pendientes de comprobar con la ficha técnica del
-proveedor**: "miel de campo 100% pura", "Cacao mexicano al 70%", "100% Mexicano · Siembra
-local", "100% Origen campesino local", "0% Jarabe artificial o aditivos", "Hecho fresco bajo
-pedido" y "Hecho con miel". Si el proveedor no las sostiene, hay que quitarlas.
+Las afirmaciones sobre el producto ya se revisaron una por una con el proveedor. El endulzante es
+**miel de piloncillo**, no miel de abeja: "miel" a secas se entiende como miel de abeja en México,
+así que el sitio dice piloncillo en todos lados. "100% Mexicano" es la única del grupo original
+que quedó, porque es verdad. Se retiraron "Cacao mexicano al 70%", "Miel de campo 100% pura",
+"Siembra local", "100% Origen campesino local", "0% Jarabe artificial o aditivos", "Hecho fresco
+bajo pedido", "Hecho con miel", "Producción 100% Fresca", "comercio justo" y "Sin intermediarios".
 
-Ya se resolvieron: "Producción 100% Fresca" (atribuía producción propia), "Siembra limpia &
-comercio justo" (comercio justo es una certificación con dueño) y "Sin intermediarios" (dejó de
-ser exacto al haber un proveedor en medio; se cambió por trato directo, que sí describe el
-canal de venta).
+Las métricas de la sección del amaranto salen del catálogo (`totalFamilias`, `totalProductos` en
+`inicio.ts`), no de números escritos a mano: antes decían "100% Origen campesino local" y "0%
+Jarabe artificial", y ahora no pueden quedarse viejas.
+
+Un gancho que sí se puede usar y conviene repetir: **todas las galletas llevan amaranto**. Está en
+el resumen de las cuatro en `products.json` y en la tarjeta de categoría de Inicio.
 
 **`npm run afirmaciones`** revisa que no reaparezcan: falla si encuentra una prohibida y avisa
 de las que están por confirmar. Normaliza los espacios antes de buscar, porque Prettier parte
