@@ -51,6 +51,7 @@ export class Catalogo {
     return `Mostrando ${n} delicia${n === 1 ? '' : 's'}`;
   });
 
+  protected readonly waPedido = this.wa.enlace('Hola Una vez más! Me gustaría hacer un pedido');
   protected readonly waCotizar = this.wa.enlace(
     'Hola Una vez más! Me interesa cotizar un pedido especial o mesa de dulces para un evento',
   );

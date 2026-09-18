@@ -28,7 +28,7 @@ export class Inicio {
   protected readonly totalFamilias = this.catalogo.vitrinas.length;
 
   protected readonly waProductos = this.wa.enlace(
-    'Hola, me gustaría conocer más sobre sus productos',
+    'Hola Una vez más! Me gustaría conocer más sobre sus productos',
   );
   protected readonly waAntojo = this.wa.enlace(
     'Hola Una vez más! Se me antojaron sus productos, ¿me pueden compartir más detalles?',

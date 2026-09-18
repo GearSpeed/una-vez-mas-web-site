@@ -46,13 +46,18 @@
         <span class="font-label-md text-label-md text-on-surface-variant">Pedidos Directos</span>
         <span
           class="inline-flex items-center px-2 py-0.5 rounded-full bg-surface-container-high text-primary font-label-sm text-label-sm"
-          >Directo por WhatsApp</span
+          >Respuesta rápida</span
         >
       </div>
-      <p class="flex items-baseline gap-2 m-0">
-        <span class="font-headline-xl text-headline-xl text-primary font-bold">+52 55</span>
-        <span class="font-headline-sm text-headline-sm text-secondary">2660 4734</span>
-      </p>
+      <a
+        class="h-12 px-5 rounded-full bg-primary-container text-on-primary font-label-md text-label-md flex items-center justify-center gap-2 hover:bg-secondary-container transition-all shadow-sm"
+        rel="noopener noreferrer"
+        target="_blank"
+        [href]="waPedido"
+      >
+        <span aria-hidden="true" class="material-symbols-outlined text-[20px]">chat</span>
+        <span>Pedir por WhatsApp</span>
+      </a>
       <p class="flex items-center gap-2 text-on-surface-variant font-body-sm text-body-sm m-0">
         <span aria-hidden="true" class="material-symbols-outlined text-primary text-[18px]"
           >verified</span

@@ -12,7 +12,7 @@
     "titulo": "Pedir por WhatsApp",
     "detalle": "Atención directa e inmediata",
     "icono": "chat",
-    "waTexto": "Hola, vengo desde sus redes sociales y me gustaría hacer un pedido",
+    "waTexto": "Hola Una vez más! Vengo desde sus redes sociales y me gustaría hacer un pedido",
     "estilo": "whatsapp"
   },
   {
@@ -47,7 +47,7 @@
     "titulo": "Facebook",
     "detalle": "Una vez más · Comunidad y eventos",
     "icono": "groups",
-    "url": "https://facebook.com",
+    "url": "https://www.facebook.com/share/1Eo3SjD9sj/",
     "estilo": "normal",
     "iconoColor": "text-primary"
   },

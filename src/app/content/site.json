@@ -5,7 +5,10 @@
   "claim": "Antojitos ancestrales · Deliciosos por naturaleza",
   "dominio": "www.unavezmasmx.com",
   "url": "https://www.unavezmasmx.com",
-  "whatsapp": { "numero": "525526604734", "visible": "+52 55 2660 4734" },
+  "whatsapp": {
+    "numero": "525526604734",
+    "visible": "+52 55 2660 4734"
+  },
   "correo": "contactanos@unavezmasmx.com",
   "horario": "Lun - Sáb: 9:00 AM - 7:00 PM",
   "redes": [
@@ -37,7 +40,7 @@
       "id": "facebook",
       "nombre": "Facebook",
       "usuario": "Una vez más",
-      "url": "https://facebook.com",
+      "url": "https://www.facebook.com/share/1Eo3SjD9sj/",
       "icono": "share",
       "tema": "Comunidad & Avisos"
     }
