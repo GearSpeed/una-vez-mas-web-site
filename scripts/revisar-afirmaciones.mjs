@@ -40,13 +40,28 @@ const PROHIBIDAS = [
   /jarabe artificial/i,
   /sin conservadores/i,
   /hecho fresco/i,
+
+  // Verbos de producción y posesión del cultivo que se escaparon de las primeras
+  // pasadas: conviene el patrón amplio, no la frase exacta.
+  /cosecham|sembram|cultivam|amasam|horneam|cocinam|endulzam|mezclam|freím/i,
+  // Ojo: "nuestra tierra" en singular es el modismo de "nuestro país" y es válido;
+  // aquí sólo van las formas que implican ser dueño del cultivo.
+  /nuestras tierras|nuestros cultivos|nuestra (parcela|siembra|cosecha)/i,
+  /nuestro (comal|taller|obrador|horno)/i,
 ];
 
 /**
  * Vigiladas: no son falsas, pero conviene verlas si alguien las mueve.
  * "100% Mexicano" está confirmada como verdadera y por eso no aparece aquí.
  */
-const POR_CONFIRMAR = [/\bmiel\b(?!\s+(de\s+)?piloncillo)/i];
+const POR_CONFIRMAR = [
+  // "miel" a secas se entiende como miel de abeja; el endulzante es piloncillo
+  /\bmiel\b(?!\s+\w*\s*(de\s+)?piloncillo)/i,
+  // Afirmaciones de salud sobre un dulce: la NOM-051 las acota, y un producto con
+  // piloncillo llevaría sello de exceso de azúcares. Lo nutritivo se le atribuye al
+  // grano de amaranto, no al dulce terminado.
+  /saludable|\bsanos?\b|nutritiv[oa]s?|\blight\b|sin az[úu]car/i,
+];
 
 const raiz = process.argv[2] === 'dist' ? 'dist/una_vez_mas_web_site/browser' : 'src';
 const EXT = process.argv[2] === 'dist' ? ['.html'] : ['.html', '.ts', '.json'];

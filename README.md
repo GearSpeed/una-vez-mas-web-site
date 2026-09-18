@@ -104,6 +104,15 @@ Jarabe artificial", y ahora no pueden quedarse viejas.
 Un gancho que sí se puede usar y conviene repetir: **todas las galletas llevan amaranto**. Está en
 el resumen de las cuatro en `products.json` y en la tarjeta de categoría de Inicio.
 
+Tampoco van **afirmaciones de salud** sobre el producto terminado ("sano", "nutritivo",
+"saludable"): la NOM-051 las acota, y un dulce endulzado con piloncillo llevaría sello de exceso
+de azúcares. Lo nutricional se le atribuye al **grano de amaranto**, que sí tiene fama ganada
+("un grano mexicano que alimenta como pocos"), no al dulce.
+
+Nota sobre "nuestra tierra": en singular es el modismo de "nuestro país" y es válido. Lo que no
+va es "nuestras tierras", "nuestros cultivos", "nuestra cosecha" ni "cosechamos", que implican
+ser dueño del cultivo.
+
 **`npm run afirmaciones`** revisa que no reaparezcan: falla si encuentra una prohibida y avisa
 de las que están por confirmar. Normaliza los espacios antes de buscar, porque Prettier parte
 las frases entre líneas ("Hecho a\n mano en México") y un grep normal no las encuentra — así se
