@@ -9,6 +9,7 @@
     "postbuild": "node scripts/post-build.mjs",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
+    "afirmaciones": "node scripts/revisar-afirmaciones.mjs",
     "sitemap": "node scripts/generar-sitemap.mjs"
   },
   "private": true,

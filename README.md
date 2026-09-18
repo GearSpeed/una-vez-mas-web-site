@@ -92,9 +92,18 @@ a mano" conservan la calidez sin mentir.
 
 Afirmaciones que siguen en el sitio y **están pendientes de comprobar con la ficha técnica del
 proveedor**: "miel de campo 100% pura", "Cacao mexicano al 70%", "100% Mexicano · Siembra
-local", "100% Origen campesino local", "0% Jarabe artificial o aditivos", "Producción 100%
-Fresca", "Hecho fresco bajo pedido", "Siembra limpia & comercio justo" y "Sin intermediarios".
-Si el proveedor no las sostiene, hay que quitarlas.
+local", "100% Origen campesino local", "0% Jarabe artificial o aditivos", "Hecho fresco bajo
+pedido" y "Hecho con miel". Si el proveedor no las sostiene, hay que quitarlas.
+
+Ya se resolvieron: "Producción 100% Fresca" (atribuía producción propia), "Siembra limpia &
+comercio justo" (comercio justo es una certificación con dueño) y "Sin intermediarios" (dejó de
+ser exacto al haber un proveedor en medio; se cambió por trato directo, que sí describe el
+canal de venta).
+
+**`npm run afirmaciones`** revisa que no reaparezcan: falla si encuentra una prohibida y avisa
+de las que están por confirmar. Normaliza los espacios antes de buscar, porque Prettier parte
+las frases entre líneas ("Hecho a\n mano en México") y un grep normal no las encuentra — así se
+escondieron dos de ellas. Con `npm run afirmaciones dist` revisa el HTML ya compilado.
 
 ## Desplegar
 
