@@ -64,7 +64,7 @@ export class Nosotros {
       insignia: 'La Flor Protectora',
       estatura: 'Estatura chibi: ~7 cm',
       imagen: 'img/mascotas/ranto.jpg',
-      alt: 'Ranto, la flor de amaranto magenta, con sombrero de campo y una canasta de mimbre llena de dulces artesanales',
+      alt: 'Ranto, la flor de amaranto magenta, con sombrero de campo y una canasta de mimbre llena de dulces tradicionales',
       puntoColor: 'bg-secondary',
       manchaColor: 'bg-primary-fixed/40',
       descripcion:
@@ -87,9 +87,9 @@ export class Nosotros {
     {
       icono: 'bakery_dining',
       fondo: 'bg-primary-container text-on-primary',
-      titulo: 'Sabor artesanal & recetas auténticas',
+      titulo: 'Sabores de siempre, bien escogidos',
       texto:
-        'Respetamos los tiempos del tostado, el caramelo exacto de miel silvestre y combinaciones con frutos secos selectos sin conservadores artificiales.',
+        'Probamos cada producto antes de ofrecerlo y trabajamos con proveedores que cuidan el punto del tostado y del caramelo.',
       pieIcono: 'check_circle',
       pieTexto: 'Calidad en cada lote',
       pieColor: 'text-primary',

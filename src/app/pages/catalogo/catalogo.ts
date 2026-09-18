@@ -48,7 +48,7 @@ export class Catalogo {
 
   protected readonly conteo = computed(() => {
     const n = this.visibles().length;
-    return `Mostrando ${n} delicia${n === 1 ? '' : 's'} artesanal${n === 1 ? '' : 'es'}`;
+    return `Mostrando ${n} delicia${n === 1 ? '' : 's'}`;
   });
 
   protected readonly waCotizar = this.wa.enlace(

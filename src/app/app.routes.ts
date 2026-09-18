@@ -26,7 +26,7 @@ export const routes: Routes = [
           seo: {
             titulo: 'Antojitos ancestrales de amaranto',
             descripcion:
-              'Alegrías, galletas y borrachitos artesanales de amaranto mexicano, endulzados con miel de campo y piloncillo. Pide directo por WhatsApp.',
+              'Alegrías, galletas y borrachitos de amaranto mexicano: los dulces de siempre, escogidos uno por uno. Pide directo por WhatsApp.',
           },
         },
       },
@@ -35,9 +35,9 @@ export const routes: Routes = [
         loadComponent: () => import('./pages/catalogo/catalogo').then((m) => m.Catalogo),
         data: {
           seo: {
-            titulo: 'Catálogo artesanal',
+            titulo: 'Catálogo de dulces mexicanos',
             descripcion:
-              'Galletas de avena, chocolate, coco y nuez; borrachitos de tequila, ron y Baileys; y alegrías tradicionales de amaranto. Hechos frescos bajo pedido.',
+              'Galletas de avena, chocolate, coco y nuez; borrachitos de tequila, ron y Baileys; y alegrías tradicionales de amaranto. Los sabores de siempre, escogidos para compartir.',
           },
         },
         children: [

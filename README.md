@@ -1,6 +1,6 @@
 # Una vez más — sitio web
 
-Embudo de ventas de **Una vez más**, productos artesanales de amaranto (alegrías, galletas y
+Embudo de ventas de **Una vez más**, dulces mexicanos de amaranto (alegrías, galletas y
 borrachitos). Angular 21, sólo front end: no hay backend y el "checkout" es WhatsApp con el
 mensaje precargado. El sitio se compila a **HTML estático prerenderizado**, listo para publicar
 en Netlify, Firebase Hosting, Vercel o GitHub Pages.
@@ -78,6 +78,23 @@ Los tokens del design system "Herencia y Alegría Artesanal" están en el bloque
 ⚠️ **Ojo con `DESIGN.md`**: su prosa nombra una paleta (`#800F35`, `#C91C59`, `#E8AD52`) distinta
 a la de su frontmatter, y lo que manda es el **frontmatter**. Los hex de la prosa corresponden a
 los tonos `*-container`; salieron de los colores reales del logo.
+
+## Cómo hablamos del producto
+
+El producto lo surte un proveedor y **la producción es industrial**. El sitio no debe decir
+"artesanal", "hecho a mano", "horneado" ni ningún verbo que implique que Una vez más produce
+("elaboramos", "tostamos", "transformamos"). En México esas son declaraciones sustantivas y la
+LFPC las puede tratar como publicidad engañosa.
+
+La voz es **"nosotros lo escogemos"**, no "nosotros lo hacemos": escogemos, seleccionamos,
+traemos, armamos (las charolas y canastitas sí las armamos). "Elegidos uno por uno" y "escogido
+a mano" conservan la calidez sin mentir.
+
+Afirmaciones que siguen en el sitio y **están pendientes de comprobar con la ficha técnica del
+proveedor**: "miel de campo 100% pura", "Cacao mexicano al 70%", "100% Mexicano · Siembra
+local", "100% Origen campesino local", "0% Jarabe artificial o aditivos", "Producción 100%
+Fresca", "Hecho fresco bajo pedido", "Siembra limpia & comercio justo" y "Sin intermediarios".
+Si el proveedor no las sostiene, hay que quitarlas.
 
 ## Desplegar
 
