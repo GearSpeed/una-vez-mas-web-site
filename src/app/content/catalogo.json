@@ -2,15 +2,36 @@
   "categorias": [
     {
       "nombre": "Galletas",
-      "vitrina": null
+      "vitrina": {
+        "insignia": "Tradición dulce",
+        "icono": "cookie",
+        "descripcion": "Todas llevan amaranto: avena, chocolate, coco y nuez, con esa textura crocante y suave al mismo tiempo.",
+        "titulo": "Galletas de Amaranto",
+        "cta": "Ver nuestras galletas",
+        "imagen": null
+      }
     },
     {
       "nombre": "Borrachitos",
-      "vitrina": null
+      "vitrina": {
+        "insignia": "Tradición Poblana",
+        "icono": "local_bar",
+        "descripcion": "Golosina típica embalsamada en licor suave: Tequila, Ron, Baileys y tradicionales de frutas para deleitar el paladar.",
+        "titulo": "Borrachitos Finos",
+        "cta": "Explorar licores dulces",
+        "imagen": null
+      }
     },
     {
       "nombre": "Alegrías",
-      "vitrina": null
+      "vitrina": {
+        "insignia": "Herencia Prehispánica",
+        "icono": "grain",
+        "descripcion": "Las clásicas barras doradas de amaranto tostado, ligadas con miel de piloncillo, pasas y semillas selectas de calabaza y nuez.",
+        "titulo": "Alegrías de Amaranto",
+        "cta": "Ver variedades de alegría",
+        "imagen": null
+      }
     }
   ],
   "productos": [
@@ -55,8 +76,8 @@
       "precio": null,
       "disponibilidad": "agotado",
       "imagen": {
-        "url": "https://img.unavezmasmx.com/productos/2/bb418f6bf3caf354-1200.webp",
-        "urlChica": "https://img.unavezmasmx.com/productos/2/bb418f6bf3caf354-600.webp",
+        "url": "https://img.unavezmasmx.com/productos/2/008a0b5caf2e104d-1200.webp",
+        "urlChica": "https://img.unavezmasmx.com/productos/2/008a0b5caf2e104d-600.webp",
         "alt": "Galletas de chocolate con amaranto tostado espolvoreadas con cacao mexicano.",
         "esPlaceholder": false
       },
