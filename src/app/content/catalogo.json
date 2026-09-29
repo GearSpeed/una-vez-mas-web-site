@@ -2,14 +2,15 @@
   "categorias": [
     "Galletas",
     "Borrachitos",
-    "Alegrías"
+    "Alegrías",
+    "Oblea"
   ],
   "productos": [
     {
       "slug": "galletas-avena",
       "nombre": "Galletas de Avena",
       "categoria": "Galletas",
-      "presentacion": null,
+      "presentacion": "6 pzas",
       "resumen": "Avena selecta y amaranto con un toque de canela, balanceadas y crujientes.",
       "descripcion": "Avena selecta y amaranto con un toque de canela, balanceadas y crujientes. La ligereza de la avena entera junto al aroma de la canela tradicional.",
       "ingredientes": [
@@ -19,10 +20,10 @@
         "miel de piloncillo suave"
       ],
       "precio": null,
-      "disponibilidad": "disponible",
+      "disponibilidad": "agotado",
       "imagen": {
-        "url": "img/productos/galletas-avena.jpg",
-        "urlChica": "img/productos/galletas-avena.jpg",
+        "url": "https://img.unavezmasmx.com/productos/1/20720d40834391f6-1200.webp",
+        "urlChica": "https://img.unavezmasmx.com/productos/1/20720d40834391f6-600.webp",
         "alt": "Galletas de avena con amaranto reventado y canela sobre un plato de barro.",
         "esPlaceholder": false
       },
@@ -36,7 +37,7 @@
       "slug": "galletas-chispas-chocolate",
       "nombre": "Galletas de Chispas de Chocolate",
       "categoria": "Galletas",
-      "presentacion": null,
+      "presentacion": "6 pzas",
       "resumen": "Cacao balanceado con textura ligera y amaranto tostado.",
       "descripcion": "Cacao balanceado con textura ligera y amaranto tostado. Notas intensas a chocolate mexicano con el crujido fino de nuestras semillas seleccionadas de amaranto.",
       "ingredientes": [
@@ -45,10 +46,10 @@
         "toque de piloncillo y mantequilla pura"
       ],
       "precio": null,
-      "disponibilidad": "disponible",
+      "disponibilidad": "agotado",
       "imagen": {
-        "url": "img/productos/galletas-chispas-chocolate.jpg",
-        "urlChica": "img/productos/galletas-chispas-chocolate.jpg",
+        "url": "https://img.unavezmasmx.com/productos/2/bb418f6bf3caf354-1200.webp",
+        "urlChica": "https://img.unavezmasmx.com/productos/2/bb418f6bf3caf354-600.webp",
         "alt": "Galletas de chocolate con amaranto tostado espolvoreadas con cacao mexicano.",
         "esPlaceholder": false
       },
@@ -62,7 +63,7 @@
       "slug": "galletas-coco",
       "nombre": "Galletas de Coco",
       "categoria": "Galletas",
-      "presentacion": null,
+      "presentacion": "6 pzas",
       "resumen": "Coco rallado tostado con la delicadeza del amaranto.",
       "descripcion": "Coco rallado tostado con la delicadeza del amaranto. Dulzor natural en perfecta armonía con la textura hojaldrada y crujiente.",
       "ingredientes": [
@@ -71,10 +72,10 @@
         "mantequilla fina"
       ],
       "precio": null,
-      "disponibilidad": "disponible",
+      "disponibilidad": "agotado",
       "imagen": {
-        "url": "img/productos/galletas-coco.jpg",
-        "urlChica": "img/productos/galletas-coco.jpg",
+        "url": "https://img.unavezmasmx.com/productos/3/6eab6bdde4e8f9ed-1200.webp",
+        "urlChica": "https://img.unavezmasmx.com/productos/3/6eab6bdde4e8f9ed-600.webp",
         "alt": "Galletas doradas de coco tostado con racimos de amaranto en loza de barro.",
         "esPlaceholder": false
       },
@@ -84,7 +85,7 @@
       "slug": "galletas-nuez",
       "nombre": "Galletas de Nuez",
       "categoria": "Galletas",
-      "presentacion": null,
+      "presentacion": "6 pzas",
       "resumen": "Nuez pecana y amaranto, con aroma a repostería tradicional casera.",
       "descripcion": "Nuez pecana seleccionada, aroma a repostería tradicional casera. Un clásico imprescindible con granos enteros de nuez y el toque suave del amaranto inflado.",
       "ingredientes": [
@@ -94,78 +95,11 @@
         "harina selecta"
       ],
       "precio": null,
-      "disponibilidad": "disponible",
+      "disponibilidad": "agotado",
       "imagen": {
-        "url": "img/productos/galletas-nuez.jpg",
-        "urlChica": "img/productos/galletas-nuez.jpg",
+        "url": "https://img.unavezmasmx.com/productos/4/0b4459dac6c39266-1200.webp",
+        "urlChica": "https://img.unavezmasmx.com/productos/4/0b4459dac6c39266-600.webp",
         "alt": "Galletas de nuez pecana espolvoreadas con amaranto y azúcar glass sobre madera rústica.",
-        "esPlaceholder": false
-      },
-      "destacado": null
-    },
-    {
-      "slug": "borrachitos-tequila",
-      "nombre": "Borrachitos de Tequila",
-      "categoria": "Borrachitos",
-      "presentacion": null,
-      "resumen": "Antojito tradicional con infusión suave de tequila y capa azucarada.",
-      "descripcion": "Antojito tradicional con infusión suave de tequila y capa azucarada. Dulce de fécula suave con el toque distintivo y festivo de las haciendas de agave.",
-      "ingredientes": [
-        "Fécula suave",
-        "tequila reposado suave",
-        "azúcar cristalizada natural"
-      ],
-      "precio": null,
-      "disponibilidad": "disponible",
-      "imagen": {
-        "url": "img/productos/borrachitos-tequila.jpg",
-        "urlChica": "img/productos/borrachitos-tequila.jpg",
-        "alt": "Borrachitos de tequila cubiertos de azúcar cristalizada en un plato de barro.",
-        "esPlaceholder": false
-      },
-      "destacado": null
-    },
-    {
-      "slug": "borrachitos-ron",
-      "nombre": "Borrachitos de Ron",
-      "categoria": "Borrachitos",
-      "presentacion": null,
-      "resumen": "Notas cálidas de ron en un dulce suave y aromático.",
-      "descripcion": "Notas cálidas de ron en un dulce suave y aromático. Receta familiar con esencias de caña y textura tierna que se deshace al paladar.",
-      "ingredientes": [
-        "Esencia de ron añejo",
-        "almíbar de caña",
-        "fécula fina",
-        "cobertura azucarada"
-      ],
-      "precio": null,
-      "disponibilidad": "disponible",
-      "imagen": {
-        "url": "img/productos/borrachitos-ron.jpg",
-        "urlChica": "img/productos/borrachitos-ron.jpg",
-        "alt": "Borrachitos de ron color ámbar con costra de cristales de azúcar.",
-        "esPlaceholder": false
-      },
-      "destacado": null
-    },
-    {
-      "slug": "borrachitos-baileys",
-      "nombre": "Borrachitos de Baileys",
-      "categoria": "Borrachitos",
-      "presentacion": null,
-      "resumen": "Cremosa combinación de licor de crema irlandesa y receta tradicional.",
-      "descripcion": "Cremosa combinación de licor de crema irlandesa y receta tradicional. Una reinterpretación moderna y cremosa de nuestro consentido típico.",
-      "ingredientes": [
-        "Licor de crema irlandesa tipo Baileys",
-        "leche condensada",
-        "fécula suave"
-      ],
-      "precio": null,
-      "disponibilidad": "disponible",
-      "imagen": {
-        "url": "img/productos/borrachitos-baileys.jpg",
-        "urlChica": "img/productos/borrachitos-baileys.jpg",
-        "alt": "Borrachitos de crema irlandesa de textura sedosa espolvoreados con azúcar.",
         "esPlaceholder": false
       },
       "destacado": null
@@ -184,10 +118,10 @@
         "licor suave de campo"
       ],
       "precio": null,
-      "disponibilidad": "disponible",
+      "disponibilidad": "agotado",
       "imagen": {
-        "url": "img/productos/borrachitos-clasicos.jpg",
-        "urlChica": "img/productos/borrachitos-clasicos.jpg",
+        "url": "https://img.unavezmasmx.com/productos/8/4670584f90bf4f2f-1200.webp",
+        "urlChica": "https://img.unavezmasmx.com/productos/8/4670584f90bf4f2f-600.webp",
         "alt": "Surtido de borrachitos de sabores frutales brillando con cristales de azúcar.",
         "esPlaceholder": false
       },
@@ -196,6 +130,73 @@
         "quip": "Sabor a Tradición",
         "texto": "Tequila y licor suave con pulpa de fruta y cobertura cristalina."
       }
+    },
+    {
+      "slug": "borrachitos-baileys",
+      "nombre": "Borrachitos de Baileys",
+      "categoria": "Borrachitos",
+      "presentacion": null,
+      "resumen": "Cremosa combinación de licor de crema irlandesa y receta tradicional.",
+      "descripcion": "Cremosa combinación de licor de crema irlandesa y receta tradicional. Una reinterpretación moderna y cremosa de nuestro consentido típico.",
+      "ingredientes": [
+        "Licor de crema irlandesa tipo Baileys",
+        "leche condensada",
+        "fécula suave"
+      ],
+      "precio": null,
+      "disponibilidad": "agotado",
+      "imagen": {
+        "url": "https://img.unavezmasmx.com/productos/7/365ab88be9b09c20-1200.webp",
+        "urlChica": "https://img.unavezmasmx.com/productos/7/365ab88be9b09c20-600.webp",
+        "alt": "Borrachitos de crema irlandesa de textura sedosa espolvoreados con azúcar.",
+        "esPlaceholder": false
+      },
+      "destacado": null
+    },
+    {
+      "slug": "borrachitos-ron",
+      "nombre": "Borrachitos de Ron",
+      "categoria": "Borrachitos",
+      "presentacion": null,
+      "resumen": "Notas cálidas de ron en un dulce suave y aromático.",
+      "descripcion": "Notas cálidas de ron en un dulce suave y aromático. Receta familiar con esencias de caña y textura tierna que se deshace al paladar.",
+      "ingredientes": [
+        "Esencia de ron añejo",
+        "almíbar de caña",
+        "fécula fina",
+        "cobertura azucarada"
+      ],
+      "precio": null,
+      "disponibilidad": "agotado",
+      "imagen": {
+        "url": "https://img.unavezmasmx.com/productos/6/9dd22458a4fb5826-1200.webp",
+        "urlChica": "https://img.unavezmasmx.com/productos/6/9dd22458a4fb5826-600.webp",
+        "alt": "Borrachitos de ron color ámbar con costra de cristales de azúcar.",
+        "esPlaceholder": false
+      },
+      "destacado": null
+    },
+    {
+      "slug": "borrachitos-tequila",
+      "nombre": "Borrachitos de Tequila",
+      "categoria": "Borrachitos",
+      "presentacion": null,
+      "resumen": "Antojito tradicional con infusión suave de tequila y capa azucarada.",
+      "descripcion": "Antojito tradicional con infusión suave de tequila y capa azucarada. Dulce de fécula suave con el toque distintivo y festivo de las haciendas de agave.",
+      "ingredientes": [
+        "Fécula suave",
+        "tequila reposado suave",
+        "azúcar cristalizada natural"
+      ],
+      "precio": null,
+      "disponibilidad": "agotado",
+      "imagen": {
+        "url": "https://img.unavezmasmx.com/productos/5/96f68af53ee7fc95-1200.webp",
+        "urlChica": "https://img.unavezmasmx.com/productos/5/96f68af53ee7fc95-600.webp",
+        "alt": "Borrachitos de tequila cubiertos de azúcar cristalizada en un plato de barro.",
+        "esPlaceholder": false
+      },
+      "destacado": null
     },
     {
       "slug": "alegrias-tradicionales",
@@ -211,10 +212,10 @@
         "pasas seleccionadas"
       ],
       "precio": null,
-      "disponibilidad": "disponible",
+      "disponibilidad": "agotado",
       "imagen": {
-        "url": "img/productos/alegrias-tradicionales.jpg",
-        "urlChica": "img/productos/alegrias-tradicionales.jpg",
+        "url": "https://img.unavezmasmx.com/productos/9/f6d8c9010356a376-1200.webp",
+        "urlChica": "https://img.unavezmasmx.com/productos/9/f6d8c9010356a376-600.webp",
         "alt": "Barras de alegría de amaranto con miel de piloncillo, pepitas y pasas.",
         "esPlaceholder": false
       },
