@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { afterNextRender, computed, inject, Injectable, signal } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
-import { CATEGORIAS, ORIGEN_CATALOGO, PRODUCTOS } from '../../content';
-import type { Categoria, Producto } from '../models/producto';
+import { CATEGORIAS, PRODUCTOS } from '../../content';
+import type { Categoria, Imagen, Producto } from '../models/producto';
 
 /** Lo que responde `GET /api/publico/catalogo`. Ver `docs/contrato-sitio.md`. */
 interface CatalogoPublico {
@@ -13,12 +13,26 @@ interface CatalogoPublico {
 /** Valor del filtro: el nombre de una categoría, o todas. */
 export type Filtro = string;
 
+/** La aplicación de gestión. Ver `docs/contrato-sitio.md` en `una_vez_mas_gestion`. */
+const URL_PRODUCCION = 'https://gestion.unavezmasmx.com/api/publico/catalogo';
+/** El `ng serve` de gestión, que hace de proxy a su API. */
+const URL_LOCAL = 'http://localhost:4300/api/publico/catalogo';
+
 /**
- * De dónde sale el catálogo. La escribe el build, que es quien sabe contra qué
- * aplicación se compiló: así un build local se refresca contra la API local. Ver
- * `docs/contrato-sitio.md` en `una_vez_mas_gestion`.
+ * Contra qué aplicación se refresca el catálogo: **si el sitio se sirve desde tu máquina,
+ * contra tu API local; si no, contra producción.**
+ *
+ * Va aquí y no en un archivo generado a propósito. Antes lo escribía el build, y eso
+ * obligaba a regenerarlo para trabajar en local y a devolverlo a producción antes de cada
+ * commit. Nadie se acuerda de eso siempre, y la vez que no te acuerdas el sitio local te
+ * muestra los datos de producción sin decir nada.
+ *
+ * Si alguien sirve un build de producción desde `localhost`, buscará la API local, no la
+ * encontrará y se quedará con la copia que trae el bundle: se ve lo mismo, sin refresco.
  */
-export const URL_CATALOGO = ORIGEN_CATALOGO;
+export function urlDelCatalogo(host = location.hostname): string {
+  return host === 'localhost' || host === '127.0.0.1' ? URL_LOCAL : URL_PRODUCCION;
+}
 
 /**
  * Quita acentos y pasa a minúsculas, para que "alegrias" encuentre "Alegrías".
@@ -58,14 +72,28 @@ export class CatalogService {
   readonly categorias = this.familias.asReadonly();
 
   /**
-   * «Nuestras Categorías Dulces»: las categorías que tienen tarjeta, o sea las que
-   * tienen foto. Se capturan en la aplicación, junto a la categoría.
+   * «Nuestras Categorías Dulces»: las categorías que traen tarjeta. Quién la trae lo
+   * decide la aplicación (tiene descripción y hay con qué vestirla).
    */
   readonly vitrinas = computed(() =>
     this.familias().filter((c): c is Categoria & { vitrina: NonNullable<Categoria['vitrina']> } =>
       Boolean(c.vitrina),
     ),
   );
+
+  /**
+   * El sorteo de las fotos de las tarjetas, un número por categoría.
+   *
+   * Vacío hasta que se hidrata, y ahí está lo importante: el HTML estático —el que indexa
+   * Google y el que ve quien llega sin JavaScript— sale siempre con la primera foto, y el
+   * sorteo ocurre después, ya en el navegador. Por eso la portada cambia por visitante
+   * aun siendo un sitio estático; el precio es que la foto se reemplaza un instante
+   * después de cargar.
+   *
+   * Se tira una sola vez: no se vuelve a sortear cuando el catálogo se refresca, para que
+   * las fotos no bailen mientras alguien está mirando.
+   */
+  private readonly sorteo = signal<Readonly<Record<string, number>>>({});
 
   /**
    * «Los Favoritos de la Casa» de la portada: los productos que traen su tarjeta escrita,
@@ -78,7 +106,32 @@ export class CatalogService {
     // Sólo en el navegador y después de hidratar: durante el prerender cada página
     // quedaría congelada con el catálogo del momento del build, que es justo lo que ya
     // trae dentro.
-    afterNextRender(() => void this.refrescar());
+    afterNextRender(() => {
+      this.sorteo.set(Object.fromEntries(this.familias().map((c) => [c.nombre, Math.random()])));
+      void this.refrescar();
+    });
+  }
+
+  /**
+   * La foto de la tarjeta de una categoría: la suya propia si alguien se la subió, y si
+   * no, una de sus productos.
+   *
+   * Sólo entran productos con **foto propia**: uno sin ella sirve el logo de relleno, y un
+   * logo no es la cara de una familia. El texto alternativo sale del producto elegido, que
+   * ya está escrito.
+   */
+  imagenDeVitrina(categoria: Categoria): Imagen | null {
+    if (categoria.vitrina?.imagen) return categoria.vitrina.imagen;
+
+    const candidatas = this.lista().filter(
+      (p) => p.categoria === categoria.nombre && !p.imagen.esPlaceholder,
+    );
+    if (candidatas.length === 0) return null;
+
+    // El módulo es por si el catálogo se refrescó y quedan menos productos que cuando se
+    // tiró el sorteo.
+    const azar = this.sorteo()[categoria.nombre] ?? 0;
+    return candidatas[Math.floor(azar * candidatas.length) % candidatas.length].imagen;
   }
 
   /**
@@ -88,7 +141,7 @@ export class CatalogService {
    */
   async refrescar(): Promise<void> {
     try {
-      const catalogo = await firstValueFrom(this.http.get<CatalogoPublico>(URL_CATALOGO));
+      const catalogo = await firstValueFrom(this.http.get<CatalogoPublico>(urlDelCatalogo()));
       // Los dos juntos o ninguno: media respuesta dejaría categorías y productos de
       // momentos distintos, y con ellos un «Próximamente» sobre una vitrina con cosas.
       if (catalogo?.productos?.length > 0 && catalogo.categorias?.length > 0) {

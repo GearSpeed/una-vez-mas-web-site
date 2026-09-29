@@ -6,6 +6,7 @@ import { SeoService } from '../../core/services/seo';
 import { WhatsappService } from '../../core/services/whatsapp';
 import {
   avisoDisponibilidad,
+  type Categoria,
   precioVisible,
   type Producto,
   type Tono,
@@ -100,5 +101,10 @@ export class Inicio {
   /** El color sale del lugar que ocupa la tarjeta: así nunca quedan cuatro iguales. */
   protected tonoDe(posicion: number): Tono {
     return TONOS[posicion % TONOS.length];
+  }
+
+  /** Su foto propia, o una de sus productos, sorteada en cada visita. */
+  protected imagenDe(categoria: Categoria) {
+    return this.catalogo.imagenDeVitrina(categoria);
   }
 }

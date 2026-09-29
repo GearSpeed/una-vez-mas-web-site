@@ -1,4 +1,3 @@
 # Lo genera `scripts/generar-catalogo.mjs` en cada build: darle formato aquí sólo
 # produciría un diff distinto en la siguiente compilación.
 src/app/content/catalogo.json
-src/app/content/catalogo-origen.json

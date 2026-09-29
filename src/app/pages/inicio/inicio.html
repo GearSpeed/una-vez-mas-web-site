@@ -163,6 +163,8 @@
         @for (categoria of vitrinas(); track categoria.nombre; let i = $index) {
           @let vitrina = categoria.vitrina;
           @let tono = tonoDe(i);
+          <!-- Su foto propia, o una de sus productos sorteada al cargar la página. -->
+          @let imagen = imagenDe(categoria);
           <article
             class="group relative rounded-3xl bg-surface-container-lowest p-6 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between overflow-hidden"
           >
@@ -181,8 +183,8 @@
                   height="436"
                   loading="lazy"
                   width="800"
-                  [alt]="vitrina.imagen.alt"
-                  [src]="vitrina.imagen.urlChica"
+                  [alt]="imagen?.alt ?? ''"
+                  [src]="imagen?.urlChica"
                 />
               </div>
               <p

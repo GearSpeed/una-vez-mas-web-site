@@ -3,8 +3,8 @@ import { HttpTestingController, provideHttpClientTesting } from '@angular/common
 import { TestBed } from '@angular/core/testing';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { CATEGORIAS, PRODUCTOS } from '../../content';
-import type { Categoria, Producto } from '../models/producto';
-import { CatalogService, normalizar, URL_CATALOGO } from './catalog';
+import type { Categoria, Imagen, Producto } from '../models/producto';
+import { CatalogService, normalizar, urlDelCatalogo } from './catalog';
 
 describe('normalizar', () => {
   it('quita acentos y baja a minúsculas', () => {
@@ -13,6 +13,21 @@ describe('normalizar', () => {
 
   it('recorta espacios de los extremos', () => {
     expect(normalizar('  Coco  ')).toBe('coco');
+  });
+});
+
+describe('urlDelCatalogo', () => {
+  it('desde tu máquina, contra tu API local', () => {
+    // Para que trabajar en local no exija tocar ningún archivo, ni acordarse de
+    // devolverlo a producción antes de commitear.
+    expect(urlDelCatalogo('localhost')).toContain('localhost:4300');
+    expect(urlDelCatalogo('127.0.0.1')).toContain('localhost:4300');
+  });
+
+  it('publicado, contra producción', () => {
+    expect(urlDelCatalogo('www.unavezmasmx.com')).toBe(
+      'https://gestion.unavezmasmx.com/api/publico/catalogo',
+    );
   });
 });
 
@@ -101,7 +116,7 @@ describe('CatalogService', () => {
 
     it('el precio que llega de la API sustituye al de la copia', async () => {
       const refresco = catalogo.refrescar();
-      http.expectOne(URL_CATALOGO).flush(respuesta());
+      http.expectOne(urlDelCatalogo()).flush(respuesta());
       await refresco;
 
       expect(catalogo.porId('galletas-avena')?.precio).toBe('99.00');
@@ -111,7 +126,7 @@ describe('CatalogService', () => {
     it('trae categorías que todavía no tienen ningún producto', async () => {
       const refresco = catalogo.refrescar();
       http
-        .expectOne(URL_CATALOGO)
+        .expectOne(urlDelCatalogo())
         .flush(respuesta({ categorias: [categoria('Galletas'), categoria('Paletas')] }));
       await refresco;
 
@@ -122,7 +137,7 @@ describe('CatalogService', () => {
 
     it('la portada sale del catálogo y respeta su orden', async () => {
       const refresco = catalogo.refrescar();
-      http.expectOne(URL_CATALOGO).flush(
+      http.expectOne(urlDelCatalogo()).flush(
         respuesta({
           productos: [
             producto({ slug: 'sin-portada' }),
@@ -140,7 +155,7 @@ describe('CatalogService', () => {
 
     it('sin ninguno prendido, la portada se queda sin tarjetas', async () => {
       const refresco = catalogo.refrescar();
-      http.expectOne(URL_CATALOGO).flush(respuesta());
+      http.expectOne(urlDelCatalogo()).flush(respuesta());
       await refresco;
 
       expect(catalogo.destacados()).toEqual([]);
@@ -148,7 +163,7 @@ describe('CatalogService', () => {
 
     it('solo las categorías con tarjeta salen en «Nuestras Categorías Dulces»', async () => {
       const refresco = catalogo.refrescar();
-      http.expectOne(URL_CATALOGO).flush(
+      http.expectOne(urlDelCatalogo()).flush(
         respuesta({
           categorias: [categoria('Obleas'), categoria('Galletas', laVitrina), categoria('Paletas')],
         }),
@@ -162,10 +177,94 @@ describe('CatalogService', () => {
       expect(catalogo.vitrinas()[0].vitrina.titulo).toBe('Galletas de Amaranto');
     });
 
+    describe('la foto de la tarjeta', () => {
+      /** Un producto de esa categoría con foto propia. */
+      const conFoto = (slug: string, cat: string, url: string) =>
+        producto({
+          slug,
+          categoria: cat,
+          imagen: { url, urlChica: url, alt: `foto de ${slug}`, esPlaceholder: false },
+        });
+
+      /** Una categoría con tarjeta; `imagen` es la suya propia, que manda sobre el sorteo. */
+      const conVitrina = (nombre: string, imagen: Imagen | null = null) =>
+        categoria(nombre, { ...laVitrina, imagen });
+
+      const refrescarCon = async (cuerpo: object) => {
+        const refresco = catalogo.refrescar();
+        http.expectOne(urlDelCatalogo()).flush(cuerpo);
+        await refresco;
+      };
+
+      it('sin foto propia, la saca de un producto de esa categoría', async () => {
+        await refrescarCon({
+          categorias: [conVitrina('Galletas')],
+          productos: [
+            conFoto('avena', 'Galletas', 'https://img.ejemplo/avena.webp'),
+            conFoto('borracho', 'Borrachitos', 'https://img.ejemplo/borracho.webp'),
+          ],
+        });
+
+        const galletas = catalogo.categorias()[0];
+        // De su familia, nunca de otra.
+        expect(catalogo.imagenDeVitrina(galletas)?.url).toBe('https://img.ejemplo/avena.webp');
+      });
+
+      it('nunca elige un producto que sirve el logo de relleno', async () => {
+        await refrescarCon({
+          categorias: [conVitrina('Galletas')],
+          productos: [
+            producto({
+              slug: 'sin-foto',
+              categoria: 'Galletas',
+              imagen: {
+                url: 'https://img.ejemplo/logo.webp',
+                urlChica: 'https://img.ejemplo/logo.webp',
+                alt: '',
+                esPlaceholder: true,
+              },
+            }),
+          ],
+        });
+
+        // Un logo no es la cara de una familia: mejor ninguna que esa.
+        expect(catalogo.imagenDeVitrina(catalogo.categorias()[0])).toBeNull();
+      });
+
+      it('la foto propia de la categoría manda sobre el sorteo', async () => {
+        const propia = {
+          url: 'https://img.ejemplo/cat.webp',
+          urlChica: 'https://img.ejemplo/cat.webp',
+          alt: 'la de la categoría',
+        };
+        await refrescarCon({
+          categorias: [conVitrina('Galletas', propia)],
+          productos: [conFoto('avena', 'Galletas', 'https://img.ejemplo/avena.webp')],
+        });
+
+        expect(catalogo.imagenDeVitrina(catalogo.categorias()[0])?.url).toBe(propia.url);
+      });
+
+      it('el sorteo no se vuelve a tirar cuando el catálogo se refresca', async () => {
+        const productos = [
+          conFoto('a', 'Galletas', 'https://img.ejemplo/a.webp'),
+          conFoto('b', 'Galletas', 'https://img.ejemplo/b.webp'),
+          conFoto('c', 'Galletas', 'https://img.ejemplo/c.webp'),
+        ];
+        await refrescarCon({ categorias: [conVitrina('Galletas')], productos });
+        const primera = catalogo.imagenDeVitrina(catalogo.categorias()[0])?.url;
+
+        // Otro refresco con los mismos datos: las fotos no deben bailar mientras
+        // alguien está mirando la página.
+        await refrescarCon({ categorias: [conVitrina('Galletas')], productos });
+        expect(catalogo.imagenDeVitrina(catalogo.categorias()[0])?.url).toBe(primera);
+      });
+    });
+
     it('si la API falla, se queda el catálogo anterior', async () => {
       const antes = catalogo.productos();
       const refresco = catalogo.refrescar();
-      http.expectOne(URL_CATALOGO).error(new ProgressEvent('error'), { status: 503 });
+      http.expectOne(urlDelCatalogo()).error(new ProgressEvent('error'), { status: 503 });
       await refresco;
 
       expect(catalogo.productos()).toBe(antes);
@@ -174,7 +273,7 @@ describe('CatalogService', () => {
     it('una respuesta vacía tampoco borra el catálogo', async () => {
       const antes = catalogo.productos();
       const refresco = catalogo.refrescar();
-      http.expectOne(URL_CATALOGO).flush({ categorias: [], productos: [] });
+      http.expectOne(urlDelCatalogo()).flush({ categorias: [], productos: [] });
       await refresco;
 
       expect(catalogo.productos()).toBe(antes);
@@ -185,7 +284,7 @@ describe('CatalogService', () => {
       const productosAntes = catalogo.productos();
       const categoriasAntes = catalogo.categorias();
       const refresco = catalogo.refrescar();
-      http.expectOne(URL_CATALOGO).flush({ categorias: [categoria('Paletas')], productos: [] });
+      http.expectOne(urlDelCatalogo()).flush({ categorias: [categoria('Paletas')], productos: [] });
       await refresco;
 
       expect(catalogo.productos()).toBe(productosAntes);

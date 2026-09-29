@@ -23,12 +23,6 @@ import { POR_CONFIRMAR, PROHIBIDAS } from './afirmaciones.mjs';
 
 const raiz = join(dirname(fileURLToPath(import.meta.url)), '..');
 const destino = join(raiz, 'src/app/content/catalogo.json');
-/**
- * De dónde salió la copia. Lo lee `CatalogService` para refrescarse contra la misma
- * aplicación: así un build local apunta a la API local sin configurar nada aparte, y no
- * pueden acabar desalineados el catálogo que trae el bundle y el que pide el navegador.
- */
-const destinoOrigen = join(raiz, 'src/app/content/catalogo-origen.json');
 const url = process.env.CATALOGO_URL ?? 'https://gestion.unavezmasmx.com/api/publico/catalogo';
 const ESPERA_MS = 15_000;
 
@@ -86,9 +80,11 @@ function esVitrina(vitrina) {
     typeof vitrina.icono === 'string' &&
     typeof vitrina.descripcion === 'string' &&
     typeof vitrina.cta === 'string' &&
-    typeof vitrina.imagen?.url === 'string' &&
-    typeof vitrina.imagen?.urlChica === 'string' &&
-    typeof vitrina.imagen?.alt === 'string'
+    // `null` es lo normal: significa «sácala de sus productos».
+    (vitrina.imagen === null ||
+      (typeof vitrina.imagen?.url === 'string' &&
+        typeof vitrina.imagen?.urlChica === 'string' &&
+        typeof vitrina.imagen?.alt === 'string'))
   );
 }
 
@@ -169,7 +165,6 @@ if (malos.length > 0) {
 
 revisarAfirmaciones(catalogo.productos);
 writeFileSync(destino, `${JSON.stringify(catalogo, null, 2)}\n`);
-writeFileSync(destinoOrigen, `${JSON.stringify({ url }, null, 2)}\n`);
 console.log(
   `catalogo.json: ${catalogo.productos.length} productos y ${catalogo.categorias.length} categorías desde ${url}`,
 );

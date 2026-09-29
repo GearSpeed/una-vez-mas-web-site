@@ -20,7 +20,6 @@ import type { Categoria, Disponibilidad, Producto } from '../core/models/product
 import type { Enlace, Faq, Sitio } from '../core/models/contenido';
 
 import catalogoJson from './catalogo.json';
-import catalogoOrigenJson from './catalogo-origen.json';
 import faqJson from './faq.json';
 import linksJson from './links.json';
 import siteJson from './site.json';
@@ -38,9 +37,6 @@ type Crudo<T, K extends keyof T> = Omit<T, K> & { [P in K]: string };
 
 const productosCrudos: readonly Crudo<Producto, 'disponibilidad'>[] = catalogoJson.productos;
 const enlacesCrudos: readonly Crudo<Enlace, 'estilo'>[] = linksJson;
-
-/** La API contra la que se compiló esta copia, y contra la que el sitio se refresca. */
-export const ORIGEN_CATALOGO: string = catalogoOrigenJson.url;
 
 /**
  * Las familias del catálogo, en el orden en que las manda la aplicación, cada una con la

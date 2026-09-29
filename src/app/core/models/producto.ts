@@ -96,7 +96,12 @@ export interface Vitrina {
   readonly descripcion: string;
   /** Ya resuelto: si no se capturó, es «Ver {nombre}». */
   readonly cta: string;
-  readonly imagen: Imagen;
+  /**
+   * Su foto propia, cuando alguien le subió una para dejarla fija. **`null` es lo normal
+   * y significa «sácala de sus productos»**: ahí el sitio sortea una, y por eso la
+   * portada cambia un poco en cada visita.
+   */
+  readonly imagen: Imagen | null;
 }
 
 /**
