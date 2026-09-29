@@ -4,13 +4,15 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "prebuild": "node scripts/generar-sitemap.mjs",
+    "prebuild": "node scripts/generar-catalogo.mjs && node scripts/generar-sitemap.mjs",
     "build": "ng build",
     "postbuild": "node scripts/post-build.mjs",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
+    "test:scripts": "vitest run --dir scripts",
     "afirmaciones": "node scripts/revisar-afirmaciones.mjs",
-    "sitemap": "node scripts/generar-sitemap.mjs"
+    "sitemap": "node scripts/generar-sitemap.mjs",
+    "catalogo": "node scripts/generar-catalogo.mjs"
   },
   "private": true,
   "packageManager": "npm@11.12.1",

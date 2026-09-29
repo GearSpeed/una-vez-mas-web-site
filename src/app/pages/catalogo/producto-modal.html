@@ -28,8 +28,8 @@
           decoding="async"
           height="436"
           width="800"
-          [alt]="p.alt"
-          [src]="'img/' + p.imagen"
+          [alt]="p.imagen.esPlaceholder ? '' : p.imagen.alt"
+          [src]="p.imagen.url"
         />
       </div>
 
@@ -42,32 +42,51 @@
         {{ p.nombre }}
       </h2>
 
-      <p class="font-body-md text-body-md text-on-surface-variant mb-6">{{ p.descripcion }}</p>
-
-      <div class="bg-surface-container-low p-4 rounded-2xl mb-6">
-        <p class="flex items-center gap-2 mb-2 m-0">
-          <span aria-hidden="true" class="material-symbols-outlined text-primary text-[18px]"
-            >nature</span
-          >
-          <span class="font-label-md text-label-md text-primary">Ingredientes destacados</span>
+      @if (p.descripcion || p.resumen) {
+        <p class="font-body-md text-body-md text-on-surface-variant mb-6">
+          {{ p.descripcion || p.resumen }}
         </p>
-        <p class="font-body-sm text-body-sm text-on-surface-variant m-0">{{ p.ingredientes }}</p>
-      </div>
+      }
+
+      @if (p.ingredientes.length) {
+        <div class="bg-surface-container-low p-4 rounded-2xl mb-6">
+          <p class="flex items-center gap-2 mb-2 m-0">
+            <span aria-hidden="true" class="material-symbols-outlined text-primary text-[18px]"
+              >nature</span
+            >
+            <span class="font-label-md text-label-md text-primary" id="ingredientes-producto"
+              >Ingredientes destacados</span
+            >
+          </p>
+          <ul
+            class="flex flex-wrap gap-2 m-0 p-0 list-none"
+            aria-labelledby="ingredientes-producto"
+          >
+            @for (ingrediente of p.ingredientes; track ingrediente) {
+              <li
+                class="px-3 py-1 rounded-full bg-surface-container font-body-sm text-body-sm text-on-surface-variant"
+              >
+                {{ ingrediente }}
+              </li>
+            }
+          </ul>
+        </div>
+      }
 
       <div class="flex flex-col gap-3">
-        @if (p.precio !== null) {
+        @if (precio(); as importe) {
           <div class="flex items-center justify-between px-2">
             <span class="font-label-md text-label-md text-on-surface-variant">
               {{ p.presentacion ?? 'Precio' }}
             </span>
             <span class="font-headline-sm text-headline-sm text-primary font-bold">
-              ${{ p.precio }} MXN
+              ${{ importe }} MXN
             </span>
           </div>
         }
         <div class="flex items-center justify-between px-2">
           <span class="font-label-md text-label-md text-on-surface-variant">Disponibilidad</span>
-          <span class="font-label-md text-label-md text-secondary">Sobre pedido</span>
+          <span class="font-label-md text-label-md text-secondary">{{ disponibilidad() }}</span>
         </div>
 
         <a

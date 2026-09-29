@@ -8,11 +8,19 @@ import { SITIO } from '../../content';
 export interface Seo {
   readonly titulo: string;
   readonly descripcion: string;
-  /** Ruta bajo /public; por defecto la portada. */
+  /**
+   * Ruta bajo /public, o una URL absoluta (las fotos de producto las sirve el bucket
+   * de la aplicación). Por defecto, la portada.
+   */
   readonly imagen?: string;
 }
 
 const IMAGEN_POR_DEFECTO = 'og/og-default.jpg';
+
+/** Las vistas previas de WhatsApp y Google necesitan la URL completa, venga de donde venga. */
+function absoluta(imagen: string): string {
+  return /^https?:\/\//.test(imagen) ? imagen : `${SITIO.url}/${imagen}`;
+}
 
 /**
  * Aplica title, description, canonical y Open Graph en cada navegación.
@@ -46,7 +54,7 @@ export class SeoService {
 
   aplicar(seo: Seo): void {
     const titulo = `${seo.titulo} · ${SITIO.nombre}`;
-    const imagen = `${SITIO.url}/${seo.imagen ?? IMAGEN_POR_DEFECTO}`;
+    const imagen = absoluta(seo.imagen ?? IMAGEN_POR_DEFECTO);
     const canonica = `${SITIO.url}${this.router.url.split('?')[0].split('#')[0]}`;
 
     this.title.setTitle(titulo);

@@ -11,46 +11,93 @@ Portado del maquetado de Google Stitch que vive en
 ## Correr y compilar
 
 ```bash
-npm start          # http://localhost:4200
-npm run build      # genera dist/una_vez_mas_web_site/browser (15 HTML estáticos)
-npm test           # Vitest
-npm run sitemap    # regenera public/sitemap.xml (el build ya lo hace solo)
+npm start            # http://localhost:4200
+npm run build        # genera dist/una_vez_mas_web_site/browser (un HTML por página y por producto)
+npm test             # Vitest
+npm run test:scripts # las pruebas de los scripts de build
+npm run catalogo     # baja el catálogo de la aplicación (el build ya lo hace solo)
+npm run sitemap      # regenera public/sitemap.xml (el build ya lo hace solo)
 ```
 
 `npm run build` no necesita servidor de Node: `outputMode: static` en `angular.json` deja HTML
 plano. Se sube la carpeta `dist/una_vez_mas_web_site/browser` tal cual.
 
-## Editar el contenido
+Antes de compilar, `prebuild` baja el catálogo de la aplicación de gestión y luego regenera el
+sitemap. **Si la API no contesta, el build no se rompe**: usa la copia que está en el
+repositorio y lo avisa en el log. Eso pasa siempre, por ejemplo, en la red de la oficina, que
+bloquea el dominio. Para compilar contra una aplicación local:
 
-Todo el texto, los productos y los datos de contacto están en **`src/app/content/`**. No hace
-falta tocar componentes.
-
-| Archivo         | Qué controla                                                                                       |
-| --------------- | -------------------------------------------------------------------------------------------------- |
-| `products.json` | Los 9 productos del catálogo: nombre, descripción, ingredientes, imagen, **precio** y presentación |
-| `featured.json` | Los 4 "Favoritos de la Casa" de Inicio (referencian un producto por `productoId`)                  |
-| `showcase.json` | Las 3 tarjetas de categoría de Inicio                                                              |
-| `faq.json`      | Las preguntas frecuentes de Contacto                                                               |
-| `links.json`    | Los botones del link-in-bio de `/enlaces`                                                          |
-| `site.json`     | WhatsApp, correo, horario, redes y textos de marca                                                 |
-
-### Poner precios
-
-En `products.json`, `precio` está en `null` y se muestra como **«Consulta precio»**. Para
-publicar precios:
-
-```json
-"precio": 65,
-"presentacion": "Paquete x 5 pzas"
+```bash
+CATALOGO_URL=http://localhost:4300/api/publico/catalogo npm run build
 ```
 
-Luego `npm run build` y subir. Los JSON se compilan dentro del bundle y se validan contra los
-tipos de `src/app/core/models/`: **si falta un campo o el tipo no cuadra, el build falla** en vez
-de romperse en producción.
+## Editar el contenido
 
-> Si más adelante quieres cambiar precios sin recompilar, mueve `products.json` a
-> `public/content/` y léelo con `HttpClient`. El único archivo a tocar es
-> `src/app/core/services/catalog.ts`, que es la puerta única a los datos.
+Hay dos orígenes, y conviene no confundirlos.
+
+### El catálogo lo manda la aplicación de gestión
+
+Productos, categorías, fotos, precios, disponibilidad, descripción e ingredientes **se capturan
+en la pantalla de Catálogo** de `gestion.unavezmasmx.com`, no aquí. Este repositorio no tiene
+precios ni fotos de producto.
+
+Ahí mismo se elige **quién sale en «Los Favoritos de la Casa»** de la portada: cada producto
+tiene un switch y, cuando está prendido, su etiqueta («Clásico», «Para el café»), su guiño («El
+favorito de Ami») y el texto de la tarjeta. Caben cuatro. El nombre, la foto, el precio y la
+disponibilidad de esa tarjeta salen del propio producto; el color de la etiqueta, del lugar que
+ocupa en la fila. Si no hay ninguno prendido, la sección no se pinta.
+
+El sitio los lee de `GET /api/publico/catalogo`, cuyo contrato está en `docs/contrato-sitio.md`
+del repositorio `una_vez_mas_gestion`. Llegan por dos caminos:
+
+1. **Al compilar**, `scripts/generar-catalogo.mjs` guarda una copia en
+   `src/app/content/catalogo.json`, junto con la URL de la que la bajó
+   (`catalogo-origen.json`, que es contra la que se refresca el navegador). Esa copia es la que
+   queda dentro del HTML estático: lo que indexa Google y lo que ve quien llega con JavaScript
+   apagado. **No se edita a mano**; la que está commiteada arrancó siendo el catálogo tal como
+   estaba escrito a mano, y el primer build contra la aplicación la sustituyó.
+2. **En el navegador**, `CatalogService` vuelve a pedir el catálogo al cargar la página. Un
+   precio nuevo o un producto agotado se ven en minutos, sin volver a publicar el sitio. Si la
+   API no contesta, se queda a la vista la copia anterior.
+
+Así que para cambiar un precio: se captura en la aplicación y ya. Publicar el sitio sólo hace
+falta cuando entra un **producto nuevo**, para que tenga su propia página estática.
+
+### Lo que sí vive aquí
+
+Es maquetado, y está en **`src/app/content/`**:
+
+| Archivo         | Qué controla                                                                       |
+| --------------- | ---------------------------------------------------------------------------------- |
+| `catalogo.json` | La copia del catálogo de la aplicación. **La genera el build**; no se edita a mano |
+| `featured.json` | Los 4 "Favoritos de la Casa" de Inicio (apuntan a un producto por `productoId`)    |
+| `showcase.json` | Las 3 tarjetas de categoría de Inicio                                              |
+| `faq.json`      | Las preguntas frecuentes de Contacto                                               |
+| `links.json`    | Los botones del link-in-bio de `/enlaces`                                          |
+| `site.json`     | WhatsApp, correo, horario, redes y textos de marca                                 |
+| `products.json` | **Ya no lo usa el sitio**: ver abajo                                               |
+
+Las vitrinas apuntan al catálogo por nombre de categoría, que ahora decide la aplicación: si
+alguien renombra una, **el build falla** con el nombre del archivo, que es cuando todavía se
+puede arreglar.
+
+### `products.json` y `featured.json`, el puente
+
+Son el catálogo y la portada como estaban escritos a mano antes de que la aplicación se hiciera
+cargo. El sitio ya no los lee; se quedan porque dos herramientas de la aplicación los usan para
+poblarla, ambas emparejando por slug:
+
+```bash
+# desde el repositorio una_vez_mas_gestion
+npm run importar-fichas -- ../una_vez_mas_web_site   # fichas y las 4 tarjetas de portada
+npm run subir-imagenes  -- ../una_vez_mas_web_site   # las fotos de public/img/productos/
+```
+
+Cuando las fichas, las tarjetas y las fotos estén en producción, estos dos archivos y las fotos
+de `public/img/productos/` y `public/img/destacados/` se pueden borrar. Las de `destacados/`
+están mejor compuestas que varias de producto: conviene subirlas en gestión como foto del
+producto antes de perderlas. Las demás imágenes (portada, vitrinas, destacados,
+mascotas) sí son del sitio y se quedan.
 
 ## Estructura
 
@@ -102,7 +149,9 @@ Las métricas de la sección del amaranto salen del catálogo (`totalFamilias`, 
 Jarabe artificial", y ahora no pueden quedarse viejas.
 
 Un gancho que sí se puede usar y conviene repetir: **todas las galletas llevan amaranto**. Está en
-el resumen de las cuatro en `products.json` y en la tarjeta de categoría de Inicio.
+el resumen de cada una, que ahora se escribe en la aplicación, y en la tarjeta de categoría de
+Inicio. Por eso `scripts/generar-catalogo.mjs` pasa las fichas que bajan por esta misma lista de
+frases prohibidas y avisa en el log: quien captura un producto no está leyendo este README.
 
 Tampoco van **afirmaciones de salud** sobre el producto terminado ("sano", "nutritivo",
 "saludable"): la NOM-051 las acota, y un dulce endulzado con piloncillo llevaría sello de exceso
@@ -160,8 +209,10 @@ Para publicar a mano sin pasar por GitHub: `npm run build` y subir la carpeta de
   recorta bien por programa).
 - **Aviso de privacidad**: el maquetado tenía el enlace en el footer apuntando a `/enlaces`. Se
   retiró hasta que exista la página real.
-- **Fotografía de producto**: las 20 imágenes son las que generó la IA de Stitch. Al haber foto
-  real de los productos, se reemplazan en `public/img/` con el mismo nombre.
-- **Precios y presentaciones** de los 9 productos.
-- Revisar el mapeo de `featured.json` → `products.json` (los 4 destacados de Inicio usan otros
-  nombres y precios que el catálogo, tal como venía el maquetado).
+- **Fotografía de producto**: las que generó la IA de Stitch. Las fotos reales se suben en la
+  aplicación, desde la pantalla de Catálogo; las editoriales (portada, vitrinas, destacados,
+  mascotas) se reemplazan en `public/img/` con el mismo nombre.
+- **Precios y presentaciones**: se capturan en la aplicación. Mientras estén en blanco, el sitio
+  dice «Consulta precio».
+- Los 4 destacados de Inicio ya no tienen nombre ni foto propios: la tarjeta usa los del
+  producto. Lo que se escribe aparte es la etiqueta, el guiño y el texto, en la aplicación.

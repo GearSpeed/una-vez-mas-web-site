@@ -7,7 +7,7 @@ export const serverRoutes: ServerRoute[] = [
     // WhatsApp y que Google puede indexar.
     path: 'catalogo/:slug',
     renderMode: RenderMode.Prerender,
-    getPrerenderParams: async () => PRODUCTOS.map((p) => ({ slug: p.id })),
+    getPrerenderParams: async () => PRODUCTOS.map((p) => ({ slug: p.slug })),
   },
   {
     path: '**',

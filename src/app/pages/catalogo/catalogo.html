@@ -86,7 +86,7 @@
       >
         Todos
       </button>
-      @for (categoria of categorias; track categoria) {
+      @for (categoria of categorias(); track categoria) {
         <button
           [attr.aria-pressed]="filtro() === categoria"
           [class]="filtro() === categoria ? tabActivo : tabInactivo"
@@ -133,7 +133,7 @@
 
     @if (visibles().length) {
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-gutter-desktop">
-        @for (producto of visibles(); track producto.id) {
+        @for (producto of visibles(); track producto.slug) {
           <article
             class="flex flex-col bg-surface-container-lowest rounded-3xl p-5 shadow-sm hover:shadow-md transition-all transform hover:-translate-y-1 group"
           >
@@ -146,20 +146,26 @@
                 height="436"
                 loading="lazy"
                 width="800"
-                [alt]="producto.alt"
-                [src]="'img/' + producto.imagen"
+                [alt]="producto.imagen.esPlaceholder ? '' : producto.imagen.alt"
+                [src]="producto.imagen.urlChica"
               />
               <span
                 class="absolute top-3 left-3 px-3 py-1 rounded-full bg-tertiary-fixed text-on-tertiary-fixed font-label-sm text-label-sm shadow-sm"
                 >{{ producto.categoria }}</span
               >
+              @if (aviso(producto); as texto) {
+                <span
+                  class="absolute top-3 right-3 px-3 py-1 rounded-full bg-surface-container-lowest text-on-surface font-label-sm text-label-sm shadow-sm"
+                  >{{ texto }}</span
+                >
+              }
             </div>
 
             <div class="flex flex-col grow">
               <h2 class="font-headline-sm text-headline-sm text-on-surface mb-2">
                 <a
                   class="hover:text-primary transition-colors"
-                  [routerLink]="['/catalogo', producto.id]"
+                  [routerLink]="['/catalogo', producto.slug]"
                   [queryParamsHandling]="'preserve'"
                   >{{ producto.nombre }}</a
                 >
@@ -174,8 +180,8 @@
                     >Precio</span
                   >
                   <span class="font-headline-sm text-headline-sm text-primary font-bold">
-                    @if (producto.precio !== null) {
-                      ${{ producto.precio }} MXN
+                    @if (precio(producto); as importe) {
+                      ${{ importe }} MXN
                     } @else {
                       Consulta precio
                     }
@@ -183,7 +189,7 @@
                 </p>
                 <a
                   class="px-3.5 py-2 rounded-full bg-surface-container-high hover:bg-surface-variant text-primary font-label-sm text-label-sm transition-colors shrink-0"
-                  [routerLink]="['/catalogo', producto.id]"
+                  [routerLink]="['/catalogo', producto.slug]"
                   [queryParamsHandling]="'preserve'"
                   >Ver detalle</a
                 >
@@ -193,7 +199,7 @@
                 class="mt-3 w-full h-11 px-4 rounded-full bg-primary-container hover:bg-secondary-container text-on-primary font-label-md text-label-md flex items-center justify-center gap-2 transition-all shadow-sm"
                 rel="noopener noreferrer"
                 target="_blank"
-                [href]="waProducto(producto.waTexto)"
+                [href]="waProducto(producto)"
               >
                 <span aria-hidden="true" class="material-symbols-outlined text-[18px]">chat</span>
                 <span>Consultar por WhatsApp</span>
@@ -201,6 +207,36 @@
             </div>
           </article>
         }
+      </div>
+    } @else if (categoriaVacia()) {
+      <div
+        class="flex flex-col items-center justify-center py-16 text-center bg-surface-container-low rounded-3xl mt-6 p-8"
+      >
+        <span aria-hidden="true" class="material-symbols-outlined text-primary text-[48px] mb-3">
+          hourglass_top
+        </span>
+        <h2 class="font-headline-sm text-headline-sm text-primary mb-1">Próximamente</h2>
+        <p class="font-body-md text-body-md text-on-surface-variant max-w-md mb-6">
+          Estamos preparando {{ filtro() }}. Escríbenos y te avisamos en cuanto estén.
+        </p>
+        <div class="flex flex-wrap items-center justify-center gap-3">
+          <a
+            class="px-6 py-2.5 rounded-full bg-primary-container hover:bg-secondary-container text-on-primary font-label-md text-label-md flex items-center gap-2 transition-colors"
+            rel="noopener noreferrer"
+            target="_blank"
+            [href]="waCategoria()"
+          >
+            <span aria-hidden="true" class="material-symbols-outlined text-[18px]">chat</span>
+            <span>Avísenme por WhatsApp</span>
+          </a>
+          <button
+            class="px-6 py-2.5 rounded-full bg-surface-container-high text-primary font-label-md text-label-md"
+            type="button"
+            (click)="limpiar()"
+          >
+            Ver todo el catálogo
+          </button>
+        </div>
       </div>
     } @else {
       <div

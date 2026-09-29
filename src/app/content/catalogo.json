@@ -1,0 +1,228 @@
+{
+  "categorias": [
+    "Galletas",
+    "Borrachitos",
+    "Alegrías"
+  ],
+  "productos": [
+    {
+      "slug": "galletas-avena",
+      "nombre": "Galletas de Avena",
+      "categoria": "Galletas",
+      "presentacion": null,
+      "resumen": "Avena selecta y amaranto con un toque de canela, balanceadas y crujientes.",
+      "descripcion": "Avena selecta y amaranto con un toque de canela, balanceadas y crujientes. La ligereza de la avena entera junto al aroma de la canela tradicional.",
+      "ingredientes": [
+        "Avena entera",
+        "amaranto reventado",
+        "canela",
+        "miel de piloncillo suave"
+      ],
+      "precio": null,
+      "disponibilidad": "disponible",
+      "imagen": {
+        "url": "img/productos/galletas-avena.jpg",
+        "urlChica": "img/productos/galletas-avena.jpg",
+        "alt": "Galletas de avena con amaranto reventado y canela sobre un plato de barro.",
+        "esPlaceholder": false
+      },
+      "destacado": {
+        "etiqueta": "Para el café",
+        "quip": "Crujiente & Ligero",
+        "texto": "Crujientes, con amaranto, canela y el crujido de la avena."
+      }
+    },
+    {
+      "slug": "galletas-chispas-chocolate",
+      "nombre": "Galletas de Chispas de Chocolate",
+      "categoria": "Galletas",
+      "presentacion": null,
+      "resumen": "Cacao balanceado con textura ligera y amaranto tostado.",
+      "descripcion": "Cacao balanceado con textura ligera y amaranto tostado. Notas intensas a chocolate mexicano con el crujido fino de nuestras semillas seleccionadas de amaranto.",
+      "ingredientes": [
+        "Cacao mexicano seleccionado",
+        "amaranto tostado",
+        "toque de piloncillo y mantequilla pura"
+      ],
+      "precio": null,
+      "disponibilidad": "disponible",
+      "imagen": {
+        "url": "img/productos/galletas-chispas-chocolate.jpg",
+        "urlChica": "img/productos/galletas-chispas-chocolate.jpg",
+        "alt": "Galletas de chocolate con amaranto tostado espolvoreadas con cacao mexicano.",
+        "esPlaceholder": false
+      },
+      "destacado": {
+        "etiqueta": "Intenso",
+        "quip": "El deleite de Ranto",
+        "texto": "Cacao oscuro con el toque inflado y sutil del amaranto."
+      }
+    },
+    {
+      "slug": "galletas-coco",
+      "nombre": "Galletas de Coco",
+      "categoria": "Galletas",
+      "presentacion": null,
+      "resumen": "Coco rallado tostado con la delicadeza del amaranto.",
+      "descripcion": "Coco rallado tostado con la delicadeza del amaranto. Dulzor natural en perfecta armonía con la textura hojaldrada y crujiente.",
+      "ingredientes": [
+        "Coco fresco rallado y deshidratado",
+        "semilla de amaranto de primera",
+        "mantequilla fina"
+      ],
+      "precio": null,
+      "disponibilidad": "disponible",
+      "imagen": {
+        "url": "img/productos/galletas-coco.jpg",
+        "urlChica": "img/productos/galletas-coco.jpg",
+        "alt": "Galletas doradas de coco tostado con racimos de amaranto en loza de barro.",
+        "esPlaceholder": false
+      },
+      "destacado": null
+    },
+    {
+      "slug": "galletas-nuez",
+      "nombre": "Galletas de Nuez",
+      "categoria": "Galletas",
+      "presentacion": null,
+      "resumen": "Nuez pecana y amaranto, con aroma a repostería tradicional casera.",
+      "descripcion": "Nuez pecana seleccionada, aroma a repostería tradicional casera. Un clásico imprescindible con granos enteros de nuez y el toque suave del amaranto inflado.",
+      "ingredientes": [
+        "Nuez pecana en trozos",
+        "amaranto reventado",
+        "vainilla natural",
+        "harina selecta"
+      ],
+      "precio": null,
+      "disponibilidad": "disponible",
+      "imagen": {
+        "url": "img/productos/galletas-nuez.jpg",
+        "urlChica": "img/productos/galletas-nuez.jpg",
+        "alt": "Galletas de nuez pecana espolvoreadas con amaranto y azúcar glass sobre madera rústica.",
+        "esPlaceholder": false
+      },
+      "destacado": null
+    },
+    {
+      "slug": "borrachitos-tequila",
+      "nombre": "Borrachitos de Tequila",
+      "categoria": "Borrachitos",
+      "presentacion": null,
+      "resumen": "Antojito tradicional con infusión suave de tequila y capa azucarada.",
+      "descripcion": "Antojito tradicional con infusión suave de tequila y capa azucarada. Dulce de fécula suave con el toque distintivo y festivo de las haciendas de agave.",
+      "ingredientes": [
+        "Fécula suave",
+        "tequila reposado suave",
+        "azúcar cristalizada natural"
+      ],
+      "precio": null,
+      "disponibilidad": "disponible",
+      "imagen": {
+        "url": "img/productos/borrachitos-tequila.jpg",
+        "urlChica": "img/productos/borrachitos-tequila.jpg",
+        "alt": "Borrachitos de tequila cubiertos de azúcar cristalizada en un plato de barro.",
+        "esPlaceholder": false
+      },
+      "destacado": null
+    },
+    {
+      "slug": "borrachitos-ron",
+      "nombre": "Borrachitos de Ron",
+      "categoria": "Borrachitos",
+      "presentacion": null,
+      "resumen": "Notas cálidas de ron en un dulce suave y aromático.",
+      "descripcion": "Notas cálidas de ron en un dulce suave y aromático. Receta familiar con esencias de caña y textura tierna que se deshace al paladar.",
+      "ingredientes": [
+        "Esencia de ron añejo",
+        "almíbar de caña",
+        "fécula fina",
+        "cobertura azucarada"
+      ],
+      "precio": null,
+      "disponibilidad": "disponible",
+      "imagen": {
+        "url": "img/productos/borrachitos-ron.jpg",
+        "urlChica": "img/productos/borrachitos-ron.jpg",
+        "alt": "Borrachitos de ron color ámbar con costra de cristales de azúcar.",
+        "esPlaceholder": false
+      },
+      "destacado": null
+    },
+    {
+      "slug": "borrachitos-baileys",
+      "nombre": "Borrachitos de Baileys",
+      "categoria": "Borrachitos",
+      "presentacion": null,
+      "resumen": "Cremosa combinación de licor de crema irlandesa y receta tradicional.",
+      "descripcion": "Cremosa combinación de licor de crema irlandesa y receta tradicional. Una reinterpretación moderna y cremosa de nuestro consentido típico.",
+      "ingredientes": [
+        "Licor de crema irlandesa tipo Baileys",
+        "leche condensada",
+        "fécula suave"
+      ],
+      "precio": null,
+      "disponibilidad": "disponible",
+      "imagen": {
+        "url": "img/productos/borrachitos-baileys.jpg",
+        "urlChica": "img/productos/borrachitos-baileys.jpg",
+        "alt": "Borrachitos de crema irlandesa de textura sedosa espolvoreados con azúcar.",
+        "esPlaceholder": false
+      },
+      "destacado": null
+    },
+    {
+      "slug": "borrachitos-clasicos",
+      "nombre": "Borrachitos Clásicos",
+      "categoria": "Borrachitos",
+      "presentacion": null,
+      "resumen": "La receta de siempre, sabores frutales surtidos y textura inconfundible.",
+      "descripcion": "La receta de siempre, sabores frutales surtidos y textura inconfundible. Evoca los paseos en ferias tradicionales de México con su toque dulce nostálgico.",
+      "ingredientes": [
+        "Fécula tradicional",
+        "esencias frutales de piña",
+        "limón y fresa",
+        "licor suave de campo"
+      ],
+      "precio": null,
+      "disponibilidad": "disponible",
+      "imagen": {
+        "url": "img/productos/borrachitos-clasicos.jpg",
+        "urlChica": "img/productos/borrachitos-clasicos.jpg",
+        "alt": "Surtido de borrachitos de sabores frutales brillando con cristales de azúcar.",
+        "esPlaceholder": false
+      },
+      "destacado": {
+        "etiqueta": "Fiesta",
+        "quip": "Sabor a Tradición",
+        "texto": "Tequila y licor suave con pulpa de fruta y cobertura cristalina."
+      }
+    },
+    {
+      "slug": "alegrias-tradicionales",
+      "nombre": "Alegrías de Amaranto Tradicionales",
+      "categoria": "Alegrías",
+      "presentacion": null,
+      "resumen": "Amaranto reventado mezclado con miel de piloncillo, pasitas y semillas crujientes.",
+      "descripcion": "Amaranto reventado mezclado con miel de piloncillo, pasitas y semillas crujientes. Patrimonio culinario de México que entrega energía viva, pura y 100% natural.",
+      "ingredientes": [
+        "Semillas de amaranto tostado",
+        "miel de piloncillo",
+        "pepitas de calabaza",
+        "pasas seleccionadas"
+      ],
+      "precio": null,
+      "disponibilidad": "disponible",
+      "imagen": {
+        "url": "img/productos/alegrias-tradicionales.jpg",
+        "urlChica": "img/productos/alegrias-tradicionales.jpg",
+        "alt": "Barras de alegría de amaranto con miel de piloncillo, pepitas y pasas.",
+        "esPlaceholder": false
+      },
+      "destacado": {
+        "etiqueta": "Clásico",
+        "quip": "El favorito de Ami",
+        "texto": "Amaranto reventado con miel de piloncillo, cacahuate y trozos de nuez."
+      }
+    }
+  ]
+}

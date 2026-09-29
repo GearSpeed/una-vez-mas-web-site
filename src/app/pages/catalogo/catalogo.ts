@@ -9,7 +9,12 @@ import {
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, Router, RouterLink, RouterOutlet } from '@angular/router';
 import { SITIO } from '../../content';
-import { CATEGORIAS } from '../../core/models/producto';
+import {
+  avisoDisponibilidad,
+  precioVisible,
+  type Producto,
+  waTextoDe,
+} from '../../core/models/producto';
 import { CatalogService, type Filtro } from '../../core/services/catalog';
 import { WhatsappService } from '../../core/services/whatsapp';
 
@@ -26,7 +31,8 @@ export class Catalogo {
   private readonly router = inject(Router);
 
   protected readonly sitio = SITIO;
-  protected readonly categorias = CATEGORIAS;
+  /** Las que existen en el catálogo de hoy: las da de alta la aplicación, no el sitio. */
+  protected readonly categorias = this.catalogo.categorias;
 
   private readonly params = toSignal(this.route.queryParamMap, { requireSync: true });
 
@@ -38,7 +44,7 @@ export class Catalogo {
    */
   protected readonly filtro = linkedSignal<Filtro>(() => {
     const cat = this.params().get('cat');
-    return cat && (CATEGORIAS as readonly string[]).includes(cat) ? (cat as Filtro) : 'todos';
+    return cat && this.categorias().includes(cat) ? cat : 'todos';
   });
   protected readonly busqueda = linkedSignal(() => this.params().get('q') ?? '');
 
@@ -46,10 +52,27 @@ export class Catalogo {
     this.catalogo.filtrar(this.filtro(), this.busqueda()),
   );
 
+  /**
+   * Una categoría que existe en la aplicación pero todavía no tiene nada publicado. No
+   * es lo mismo que una búsqueda sin resultados, y no se le dice lo mismo a quien mira:
+   * aquí no hay nada que corregir, hay algo que va a llegar.
+   */
+  protected readonly categoriaVacia = computed(() => {
+    const filtro = this.filtro();
+    return filtro !== 'todos' && this.catalogo.estaVacia(filtro);
+  });
+
   protected readonly conteo = computed(() => {
     const n = this.visibles().length;
     return `Mostrando ${n} delicia${n === 1 ? '' : 's'}`;
   });
+
+  /** Para una categoría que todavía no tiene nada: el interés no se pierde, se encauza. */
+  protected readonly waCategoria = computed(() =>
+    this.wa.enlace(
+      `Hola Una vez más! Vi que ${this.filtro()} viene en camino, ¿me avisan cuando estén?`,
+    ),
+  );
 
   protected readonly waPedido = this.wa.enlace('Hola Una vez más! Me gustaría hacer un pedido');
   protected readonly waCotizar = this.wa.enlace(
@@ -95,7 +118,16 @@ export class Catalogo {
     this.busqueda.set('');
   }
 
-  protected waProducto(texto: string): string {
-    return this.wa.enlace(texto);
+  protected waProducto(producto: Producto): string {
+    return this.wa.enlace(waTextoDe(producto));
+  }
+
+  protected precio(producto: Producto): string | null {
+    return precioVisible(producto.precio);
+  }
+
+  /** «Últimas piezas» o «Agotado». Que algo esté disponible no hace falta decirlo. */
+  protected aviso(producto: Producto): string | null {
+    return avisoDisponibilidad(producto.disponibilidad);
   }
 }

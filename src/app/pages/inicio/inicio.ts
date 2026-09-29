@@ -1,10 +1,17 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { SITIO } from '../../content';
 import { CatalogService } from '../../core/services/catalog';
 import { SeoService } from '../../core/services/seo';
 import { WhatsappService } from '../../core/services/whatsapp';
-import type { Destacado, Tono } from '../../core/models/producto';
+import {
+  avisoDisponibilidad,
+  precioVisible,
+  type Producto,
+  type Tono,
+  TONOS,
+  waTextoDe,
+} from '../../core/models/producto';
 
 @Component({
   selector: 'uvm-inicio',
@@ -18,13 +25,17 @@ export class Inicio {
 
   protected readonly sitio = SITIO;
   protected readonly vitrinas = this.catalogo.vitrinas;
+  /**
+   * «Los Favoritos de la Casa»: cuáles salen y qué dice su tarjeta se elige en la
+   * aplicación. Si no hay ninguno, la sección entera no se pinta.
+   */
   protected readonly destacados = this.catalogo.destacados;
 
   /**
    * Las métricas de la sección del amaranto salen del catálogo, no de números
    * escritos a mano: así no envejecen cuando se agreguen o quiten productos.
    */
-  protected readonly totalProductos = this.catalogo.productos.length;
+  protected readonly totalProductos = computed(() => this.catalogo.productos().length);
   protected readonly totalFamilias = this.catalogo.vitrinas.length;
 
   protected readonly waProductos = this.wa.enlace(
@@ -72,7 +83,20 @@ export class Inicio {
     });
   }
 
-  protected waDestacado(destacado: Destacado): string {
-    return this.wa.enlace(destacado.waTexto);
+  protected waDestacado(producto: Producto): string {
+    return this.wa.enlace(waTextoDe(producto));
+  }
+
+  protected precio(producto: Producto): string | null {
+    return precioVisible(producto.precio);
+  }
+
+  protected aviso(producto: Producto): string | null {
+    return avisoDisponibilidad(producto.disponibilidad);
+  }
+
+  /** El color sale del lugar que ocupa la tarjeta: así nunca quedan cuatro iguales. */
+  protected tonoDe(posicion: number): Tono {
+    return TONOS[posicion % TONOS.length];
   }
 }

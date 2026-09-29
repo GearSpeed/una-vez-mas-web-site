@@ -1,0 +1,6 @@
+# Redirecciones para Cloudflare Pages.
+
+# El producto real es de chispas de chocolate, y así se llama en la aplicación, que es
+# la que manda los slugs. La URL vieja ya está publicada y compartida por WhatsApp, así
+# que se queda apuntando a la nueva.
+/catalogo/galletas-chocolate  /catalogo/galletas-chispas-chocolate  301

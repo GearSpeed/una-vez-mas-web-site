@@ -13,17 +13,17 @@
     "waTexto": "Hola, vi Galletas de Avena en el catálogo de Una vez más y me gustaría recibir información"
   },
   {
-    "id": "galletas-chocolate",
-    "nombre": "Galletas de Chocolate",
+    "id": "galletas-chispas-chocolate",
+    "nombre": "Galletas de Chispas de Chocolate",
     "categoria": "Galletas",
     "resumen": "Cacao balanceado con textura ligera y amaranto tostado.",
     "descripcion": "Cacao balanceado con textura ligera y amaranto tostado. Notas intensas a chocolate mexicano con el crujido fino de nuestras semillas seleccionadas de amaranto.",
     "ingredientes": "Cacao mexicano seleccionado, amaranto tostado, toque de piloncillo y mantequilla pura.",
-    "imagen": "productos/galletas-chocolate.jpg",
+    "imagen": "productos/galletas-chispas-chocolate.jpg",
     "alt": "Galletas de chocolate con amaranto tostado espolvoreadas con cacao mexicano.",
     "precio": null,
     "presentacion": null,
-    "waTexto": "Hola, vi Galletas de Chocolate en el catálogo de Una vez más y me gustaría recibir información"
+    "waTexto": "Hola, vi Galletas de Chispas de Chocolate en el catálogo de Una vez más y me gustaría recibir información"
   },
   {
     "id": "galletas-coco",
