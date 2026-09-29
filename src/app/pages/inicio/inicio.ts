@@ -24,6 +24,7 @@ export class Inicio {
   private readonly wa = inject(WhatsappService);
 
   protected readonly sitio = SITIO;
+  /** «Nuestras Categorías Dulces»: las categorías con tarjeta, o sea las que tienen foto. */
   protected readonly vitrinas = this.catalogo.vitrinas;
   /**
    * «Los Favoritos de la Casa»: cuáles salen y qué dice su tarjeta se elige en la
@@ -36,7 +37,8 @@ export class Inicio {
    * escritos a mano: así no envejecen cuando se agreguen o quiten productos.
    */
   protected readonly totalProductos = computed(() => this.catalogo.productos().length);
-  protected readonly totalFamilias = this.catalogo.vitrinas.length;
+  /** Las familias del catálogo, no las tarjetas: antes contaba tarjetas y envejecía. */
+  protected readonly totalFamilias = computed(() => this.catalogo.categorias().length);
 
   protected readonly waProductos = this.wa.enlace(
     'Hola Una vez más! Me gustaría conocer más sobre sus productos',

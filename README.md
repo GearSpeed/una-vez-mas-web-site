@@ -47,6 +47,11 @@ favorito de Ami») y el texto de la tarjeta. Caben cuatro. El nombre, la foto, e
 disponibilidad de esa tarjeta salen del propio producto; el color de la etiqueta, del lugar que
 ocupa en la fila. Si no hay ninguno prendido, la sección no se pinta.
 
+Y las tarjetas de **«Nuestras Categorías Dulces»** se capturan en la categoría, en la pestaña
+Categorías de esa misma pantalla: título, insignia con su ícono, descripción, foto y texto del
+enlace. **Sin foto no hay tarjeta**: la categoría sigue saliendo en las pastillas del catálogo,
+pero no se anuncia en la portada. El color también sale del lugar que ocupa.
+
 El sitio los lee de `GET /api/publico/catalogo`, cuyo contrato está en `docs/contrato-sitio.md`
 del repositorio `una_vez_mas_gestion`. Llegan por dos caminos:
 
@@ -77,24 +82,21 @@ Es maquetado, y está en **`src/app/content/`**:
 | `site.json`     | WhatsApp, correo, horario, redes y textos de marca                                 |
 | `products.json` | **Ya no lo usa el sitio**: ver abajo                                               |
 
-Las vitrinas apuntan al catálogo por nombre de categoría, que ahora decide la aplicación: si
-alguien renombra una, **el build falla** con el nombre del archivo, que es cuando todavía se
-puede arreglar.
-
-### `products.json` y `featured.json`, el puente
+### `products.json`, `featured.json` y `showcase.json`, el puente
 
 Son el catálogo y la portada como estaban escritos a mano antes de que la aplicación se hiciera
 cargo. El sitio ya no los lee; se quedan porque dos herramientas de la aplicación los usan para
-poblarla, ambas emparejando por slug:
+poblarla —los productos por slug, las categorías por nombre—:
 
 ```bash
 # desde el repositorio una_vez_mas_gestion
-npm run importar-fichas -- ../una_vez_mas_web_site   # fichas y las 4 tarjetas de portada
-npm run subir-imagenes  -- ../una_vez_mas_web_site   # las fotos de public/img/productos/
+npm run importar-fichas -- ../una_vez_mas_web_site   # fichas, portada y tarjetas de categoría
+npm run subir-imagenes  -- ../una_vez_mas_web_site   # las fotos de productos/ y categorias/
 ```
 
-Cuando las fichas, las tarjetas y las fotos estén en producción, estos dos archivos y las fotos
-de `public/img/productos/` y `public/img/destacados/` se pueden borrar. Las de `destacados/`
+Cuando las fichas, las tarjetas y las fotos estén en producción, estos tres archivos y las
+fotos de `public/img/productos/`, `public/img/categorias/` y `public/img/destacados/` se pueden
+borrar. Las de `destacados/`
 están mejor compuestas que varias de producto: conviene subirlas en gestión como foto del
 producto antes de perderlas. Las demás imágenes (portada, vitrinas, destacados,
 mascotas) sí son del sitio y se quedan.

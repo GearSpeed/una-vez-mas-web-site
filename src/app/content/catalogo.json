@@ -1,9 +1,17 @@
 {
   "categorias": [
-    "Galletas",
-    "Borrachitos",
-    "Alegrías",
-    "Oblea"
+    {
+      "nombre": "Galletas",
+      "vitrina": null
+    },
+    {
+      "nombre": "Borrachitos",
+      "vitrina": null
+    },
+    {
+      "nombre": "Alegrías",
+      "vitrina": null
+    }
   ],
   "productos": [
     {
@@ -11,26 +19,25 @@
       "nombre": "Galletas de Avena",
       "categoria": "Galletas",
       "presentacion": "6 pzas",
-      "resumen": "Avena selecta y amaranto con un toque de canela, balanceadas y crujientes.",
-      "descripcion": "Avena selecta y amaranto con un toque de canela, balanceadas y crujientes. La ligereza de la avena entera junto al aroma de la canela tradicional.",
+      "resumen": "Avena selecta y amaranto, balanceadas y crujientes.",
+      "descripcion": "Avena selecta y amaranto, balanceadas y crujientes. La ligereza de la avena entera junto al aroma del amaranto tradicional.",
       "ingredientes": [
         "Avena entera",
         "amaranto reventado",
-        "canela",
         "miel de piloncillo suave"
       ],
       "precio": null,
       "disponibilidad": "agotado",
       "imagen": {
-        "url": "https://img.unavezmasmx.com/productos/1/20720d40834391f6-1200.webp",
-        "urlChica": "https://img.unavezmasmx.com/productos/1/20720d40834391f6-600.webp",
-        "alt": "Galletas de avena con amaranto reventado y canela sobre un plato de barro.",
+        "url": "https://img.unavezmasmx.com/productos/1/23d5512303449cb8-1200.webp",
+        "urlChica": "https://img.unavezmasmx.com/productos/1/23d5512303449cb8-600.webp",
+        "alt": "Galletas de avena con amaranto reventado.",
         "esPlaceholder": false
       },
       "destacado": {
         "etiqueta": "Para el café",
         "quip": "Crujiente & Ligero",
-        "texto": "Crujientes, con amaranto, canela y el crujido de la avena."
+        "texto": "Crujientes, galletas  de amaranto y el sabor de la avena, excelentes ingredientes para tu día a día."
       }
     },
     {
@@ -103,33 +110,6 @@
         "esPlaceholder": false
       },
       "destacado": null
-    },
-    {
-      "slug": "borrachitos-clasicos",
-      "nombre": "Borrachitos Clásicos",
-      "categoria": "Borrachitos",
-      "presentacion": null,
-      "resumen": "La receta de siempre, sabores frutales surtidos y textura inconfundible.",
-      "descripcion": "La receta de siempre, sabores frutales surtidos y textura inconfundible. Evoca los paseos en ferias tradicionales de México con su toque dulce nostálgico.",
-      "ingredientes": [
-        "Fécula tradicional",
-        "esencias frutales de piña",
-        "limón y fresa",
-        "licor suave de campo"
-      ],
-      "precio": null,
-      "disponibilidad": "agotado",
-      "imagen": {
-        "url": "https://img.unavezmasmx.com/productos/8/4670584f90bf4f2f-1200.webp",
-        "urlChica": "https://img.unavezmasmx.com/productos/8/4670584f90bf4f2f-600.webp",
-        "alt": "Surtido de borrachitos de sabores frutales brillando con cristales de azúcar.",
-        "esPlaceholder": false
-      },
-      "destacado": {
-        "etiqueta": "Fiesta",
-        "quip": "Sabor a Tradición",
-        "texto": "Tequila y licor suave con pulpa de fruta y cobertura cristalina."
-      }
     },
     {
       "slug": "borrachitos-baileys",

@@ -86,7 +86,7 @@
       >
         Todos
       </button>
-      @for (categoria of categorias(); track categoria) {
+      @for (categoria of nombres(); track categoria) {
         <button
           [attr.aria-pressed]="filtro() === categoria"
           [class]="filtro() === categoria ? tabActivo : tabInactivo"

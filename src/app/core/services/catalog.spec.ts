@@ -3,7 +3,7 @@ import { HttpTestingController, provideHttpClientTesting } from '@angular/common
 import { TestBed } from '@angular/core/testing';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { CATEGORIAS, PRODUCTOS } from '../../content';
-import type { Producto } from '../models/producto';
+import type { Categoria, Producto } from '../models/producto';
 import { CatalogService, normalizar, URL_CATALOGO } from './catalog';
 
 describe('normalizar', () => {
@@ -41,6 +41,10 @@ describe('CatalogService', () => {
     expect(catalogo.categorias()).toEqual(CATEGORIAS);
   });
 
+  it('las vitrinas son las categorías con tarjeta, nada escrito en el sitio', () => {
+    expect(catalogo.vitrinas()).toEqual(CATEGORIAS.filter((c) => c.vitrina));
+  });
+
   it('los destacados son productos del catálogo, no un dato aparte', () => {
     for (const destacado of catalogo.destacados()) {
       expect(catalogo.porId(destacado.slug)).toBe(destacado);
@@ -70,8 +74,27 @@ describe('CatalogService', () => {
       ...extra,
     });
 
+    /** Una categoría del catálogo. Sin `vitrina` no dibuja tarjeta en Inicio. */
+    const categoria = (nombre: string, vitrina: Categoria['vitrina'] = null) => ({
+      nombre,
+      vitrina,
+    });
+
+    const laVitrina = {
+      titulo: 'Galletas de Amaranto',
+      insignia: 'Tradición dulce',
+      icono: 'cookie',
+      descripcion: 'Todas llevan amaranto.',
+      cta: 'Ver nuestras galletas',
+      imagen: {
+        url: 'https://img.ejemplo/cat-1200.webp',
+        urlChica: 'https://img.ejemplo/cat-600.webp',
+        alt: 'Galletas de amaranto',
+      },
+    };
+
     const respuesta = (extra = {}) => ({
-      categorias: ['Galletas'],
+      categorias: [categoria('Galletas')],
       productos: [producto()],
       ...extra,
     });
@@ -87,10 +110,12 @@ describe('CatalogService', () => {
 
     it('trae categorías que todavía no tienen ningún producto', async () => {
       const refresco = catalogo.refrescar();
-      http.expectOne(URL_CATALOGO).flush(respuesta({ categorias: ['Galletas', 'Paletas'] }));
+      http
+        .expectOne(URL_CATALOGO)
+        .flush(respuesta({ categorias: [categoria('Galletas'), categoria('Paletas')] }));
       await refresco;
 
-      expect(catalogo.categorias()).toEqual(['Galletas', 'Paletas']);
+      expect(catalogo.categorias().map((c) => c.nombre)).toEqual(['Galletas', 'Paletas']);
       expect(catalogo.estaVacia('Paletas')).toBe(true);
       expect(catalogo.estaVacia('Galletas')).toBe(false);
     });
@@ -121,6 +146,22 @@ describe('CatalogService', () => {
       expect(catalogo.destacados()).toEqual([]);
     });
 
+    it('solo las categorías con tarjeta salen en «Nuestras Categorías Dulces»', async () => {
+      const refresco = catalogo.refrescar();
+      http.expectOne(URL_CATALOGO).flush(
+        respuesta({
+          categorias: [categoria('Obleas'), categoria('Galletas', laVitrina), categoria('Paletas')],
+        }),
+      );
+      await refresco;
+
+      // Las tres siguen sirviendo para filtrar el catálogo…
+      expect(catalogo.categorias()).toHaveLength(3);
+      // …pero solo la que tiene foto dibuja tarjeta, y en el orden en que llegó.
+      expect(catalogo.vitrinas().map((c) => c.nombre)).toEqual(['Galletas']);
+      expect(catalogo.vitrinas()[0].vitrina.titulo).toBe('Galletas de Amaranto');
+    });
+
     it('si la API falla, se queda el catálogo anterior', async () => {
       const antes = catalogo.productos();
       const refresco = catalogo.refrescar();
@@ -144,7 +185,7 @@ describe('CatalogService', () => {
       const productosAntes = catalogo.productos();
       const categoriasAntes = catalogo.categorias();
       const refresco = catalogo.refrescar();
-      http.expectOne(URL_CATALOGO).flush({ categorias: ['Paletas'], productos: [] });
+      http.expectOne(URL_CATALOGO).flush({ categorias: [categoria('Paletas')], productos: [] });
       await refresco;
 
       expect(catalogo.productos()).toBe(productosAntes);

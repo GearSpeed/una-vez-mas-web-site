@@ -32,7 +32,7 @@ export class Catalogo {
 
   protected readonly sitio = SITIO;
   /** Las que existen en el catálogo de hoy: las da de alta la aplicación, no el sitio. */
-  protected readonly categorias = this.catalogo.categorias;
+  protected readonly nombres = computed(() => this.catalogo.categorias().map((c) => c.nombre));
 
   private readonly params = toSignal(this.route.queryParamMap, { requireSync: true });
 
@@ -44,7 +44,7 @@ export class Catalogo {
    */
   protected readonly filtro = linkedSignal<Filtro>(() => {
     const cat = this.params().get('cat');
-    return cat && this.categorias().includes(cat) ? cat : 'todos';
+    return cat && this.nombres().includes(cat) ? cat : 'todos';
   });
   protected readonly busqueda = linkedSignal(() => this.params().get('q') ?? '');
 

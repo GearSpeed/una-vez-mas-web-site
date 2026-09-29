@@ -66,6 +66,32 @@ function esProducto(p) {
   );
 }
 
+/** Su nombre y, si tiene foto, la tarjeta que dibuja en «Nuestras Categorías Dulces». */
+function esCategoria(categoria) {
+  return (
+    categoria !== null &&
+    typeof categoria === 'object' &&
+    typeof categoria.nombre === 'string' &&
+    categoria.nombre.length > 0 &&
+    esVitrina(categoria.vitrina)
+  );
+}
+
+function esVitrina(vitrina) {
+  if (vitrina === null) return true;
+  return (
+    typeof vitrina === 'object' &&
+    typeof vitrina.titulo === 'string' &&
+    typeof vitrina.insignia === 'string' &&
+    typeof vitrina.icono === 'string' &&
+    typeof vitrina.descripcion === 'string' &&
+    typeof vitrina.cta === 'string' &&
+    typeof vitrina.imagen?.url === 'string' &&
+    typeof vitrina.imagen?.urlChica === 'string' &&
+    typeof vitrina.imagen?.alt === 'string'
+  );
+}
+
 /** `null`, o los tres textos de su tarjeta en «Los Favoritos de la Casa». */
 function esDestacado(destacado) {
   if (destacado === null) return true;
@@ -131,8 +157,8 @@ if (
 if (catalogo.categorias.length === 0 || catalogo.productos.length === 0) {
   conservar('la respuesta llegó sin categorías o sin productos.');
 }
-if (catalogo.categorias.some((c) => typeof c !== 'string' || c.length === 0)) {
-  conservar('las categorías no son una lista de nombres.');
+if (!catalogo.categorias.every((c) => esCategoria(c))) {
+  conservar('las categorías no cumplen el contrato.');
 }
 const malos = catalogo.productos.filter((p) => !esProducto(p));
 if (malos.length > 0) {

@@ -1,15 +1,19 @@
 /**
  * El catálogo lo manda la aplicación de gestión, no este repositorio: el contrato
  * completo está en `docs/contrato-sitio.md` de `una_vez_mas_gestion`. Aquí sólo se
- * describe lo que llega, y se le suman los datos que sí son del sitio (los destacados
- * y las vitrinas de Inicio, que son maquetado).
+ * describe lo que llega. Lo único que decide el sitio es el color de cada tarjeta.
  */
 
 /**
- * Una familia del catálogo. Ya no es una lista cerrada: las categorías se dan de alta
- * en la aplicación, y el sitio pinta las que lleguen.
+ * Una familia del catálogo. Ya no es una lista cerrada: las categorías se dan de alta en
+ * la aplicación, y el sitio pinta las que lleguen.
  */
-export type Categoria = string;
+export interface Categoria {
+  /** Con el que se filtra el catálogo. Es el `categoria` de cada producto. */
+  readonly nombre: string;
+  /** Su tarjeta en Inicio, o `null` si no tiene foto: sin foto no hay tarjeta. */
+  readonly vitrina: Vitrina | null;
+}
 
 /** Tono de la píldora de categoría, según el design system. */
 export type Tono = 'primary' | 'secondary' | 'tertiary';
@@ -23,13 +27,21 @@ export const TONOS: readonly Tono[] = ['primary', 'secondary', 'tertiary'];
 /** Si hay, si quedan pocas o si se acabó. El número exacto no sale del negocio. */
 export type Disponibilidad = 'disponible' | 'ultimas_piezas' | 'agotado';
 
-/** Siempre llega una: sin foto propia, la aplicación manda el logo. */
+/** Una foto servida por el bucket, en sus dos tamaños. */
 export interface Imagen {
   /** 1200 px, para el detalle. Absoluta: el dominio lo decide la aplicación. */
   readonly url: string;
   /** 600 px, para la tarjeta. */
   readonly urlChica: string;
   readonly alt: string;
+}
+
+/**
+ * La de un producto, que **siempre llega**: sin foto propia, la aplicación manda el logo
+ * y lo dice. La de una categoría no lleva esto, porque ahí no hay relleno: sin foto
+ * simplemente no hay tarjeta.
+ */
+export interface ImagenDeProducto extends Imagen {
   /** `true` cuando es el logo de relleno y no una foto del producto. */
   readonly esPlaceholder: boolean;
 }
@@ -52,7 +64,8 @@ export interface Producto {
   /** Slug; es también el segmento de URL en /catalogo/:slug. */
   readonly slug: string;
   readonly nombre: string;
-  readonly categoria: Categoria;
+  /** El `nombre` de una de las categorías del catálogo. */
+  readonly categoria: string;
   /** Presentación o gramaje. `null` si aún no se define. */
   readonly presentacion: string | null;
   /** Una o dos líneas para la tarjeta del catálogo. Vacío: la tarjeta no lo pinta. */
@@ -67,22 +80,23 @@ export interface Producto {
    */
   readonly precio: string | null;
   readonly disponibilidad: Disponibilidad;
-  readonly imagen: Imagen;
+  readonly imagen: ImagenDeProducto;
   /** Sus textos en «Los Favoritos de la Casa», o `null` si no sale en la portada. */
   readonly destacado: Destacado | null;
 }
 
-/** Las tres tarjetas de "Nuestras Categorías Dulces" en Inicio. */
+/** Una tarjeta de «Nuestras Categorías Dulces» en Inicio. El color lo pone el sitio. */
 export interface Vitrina {
-  readonly categoria: Categoria;
+  /** Ya resuelto por la API: si no se capturó, es el nombre de la categoría. */
   readonly titulo: string;
+  /** La píldora. Vacía: no se pinta. */
   readonly insignia: string;
-  readonly insigniaIcono: string;
-  readonly tono: Tono;
+  /** El ícono de Material Symbols que la acompaña. Vacío: no se pinta. */
+  readonly icono: string;
   readonly descripcion: string;
-  readonly imagen: string;
-  readonly alt: string;
+  /** Ya resuelto: si no se capturó, es «Ver {nombre}». */
   readonly cta: string;
+  readonly imagen: Imagen;
 }
 
 /**

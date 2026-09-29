@@ -141,85 +141,91 @@
 </section>
 
 <!-- ===================== CATEGORÍAS ===================== -->
-<section class="w-full py-space-2xl bg-surface">
-  <div class="max-w-7xl mx-auto px-margin lg:px-margin-desktop">
-    <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-space-xl">
-      <div>
-        <p class="font-label-sm text-label-sm uppercase tracking-widest text-secondary">
-          Variedad &amp; Sabor
+@if (vitrinas().length) {
+  <section class="w-full py-space-2xl bg-surface">
+    <div class="max-w-7xl mx-auto px-margin lg:px-margin-desktop">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-space-xl">
+        <div>
+          <p class="font-label-sm text-label-sm uppercase tracking-widest text-secondary">
+            Variedad &amp; Sabor
+          </p>
+          <h2 class="font-headline-xl text-headline-xl text-primary mt-1">
+            Nuestras Categorías Dulces
+          </h2>
+        </div>
+        <p class="font-body-md text-body-md text-on-surface-variant max-w-md">
+          Recetas ancestrales con toques contemporáneos, texturas balanceadas y el crujido
+          inconfundible del amaranto.
         </p>
-        <h2 class="font-headline-xl text-headline-xl text-primary mt-1">
-          Nuestras Categorías Dulces
-        </h2>
       </div>
-      <p class="font-body-md text-body-md text-on-surface-variant max-w-md">
-        Recetas ancestrales con toques contemporáneos, texturas balanceadas y el crujido
-        inconfundible del amaranto.
-      </p>
-    </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-space-lg">
-      @for (vitrina of vitrinas; track vitrina.categoria) {
-        <article
-          class="group relative rounded-3xl bg-surface-container-lowest p-6 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between overflow-hidden"
-        >
-          <div
-            aria-hidden="true"
-            [class]="
-              'absolute top-0 right-0 w-32 h-32 rounded-bl-full pointer-events-none transition-transform group-hover:scale-110 ' +
-              manchaTono[vitrina.tono]
-            "
-          ></div>
-          <div>
-            <div class="h-44 w-full rounded-2xl bg-surface-container-high overflow-hidden mb-5">
-              <img
-                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                decoding="async"
-                height="436"
-                loading="lazy"
-                width="800"
-                [alt]="vitrina.alt"
-                [src]="'img/' + vitrina.imagen"
-              />
-            </div>
-            <p
-              [class]="
-                'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface-container-high font-label-sm text-label-sm mb-2 ' +
-                textoTono[vitrina.tono]
-              "
-            >
-              <span aria-hidden="true" class="material-symbols-outlined text-[16px]">
-                {{ vitrina.insigniaIcono }}
-              </span>
-              <span>{{ vitrina.insignia }}</span>
-            </p>
-            <h3 class="font-headline-md text-headline-md text-on-surface mb-2">
-              {{ vitrina.titulo }}
-            </h3>
-            <p class="font-body-sm text-body-sm text-on-surface-variant mb-4">
-              {{ vitrina.descripcion }}
-            </p>
-          </div>
-          <a
-            [class]="
-              'font-label-md text-label-md flex items-center gap-2 transition-colors hover:text-secondary ' +
-              textoTono[vitrina.tono]
-            "
-            routerLink="/catalogo"
-            [queryParams]="{ cat: vitrina.categoria }"
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-space-lg">
+        @for (categoria of vitrinas(); track categoria.nombre; let i = $index) {
+          @let vitrina = categoria.vitrina;
+          @let tono = tonoDe(i);
+          <article
+            class="group relative rounded-3xl bg-surface-container-lowest p-6 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between overflow-hidden"
           >
-            <span>{{ vitrina.cta }}</span>
-            <span
+            <div
               aria-hidden="true"
-              class="material-symbols-outlined text-[18px] transition-transform group-hover:translate-x-1"
-              >arrow_forward</span
+              [class]="
+                'absolute top-0 right-0 w-32 h-32 rounded-bl-full pointer-events-none transition-transform group-hover:scale-110 ' +
+                manchaTono[tono]
+              "
+            ></div>
+            <div>
+              <div class="h-44 w-full rounded-2xl bg-surface-container-high overflow-hidden mb-5">
+                <img
+                  class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  decoding="async"
+                  height="436"
+                  loading="lazy"
+                  width="800"
+                  [alt]="vitrina.imagen.alt"
+                  [src]="vitrina.imagen.urlChica"
+                />
+              </div>
+              <p
+                [class]="
+                  'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface-container-high font-label-sm text-label-sm mb-2 ' +
+                  textoTono[tono]
+                "
+              >
+                @if (vitrina.icono) {
+                  <span aria-hidden="true" class="material-symbols-outlined text-[16px]">
+                    {{ vitrina.icono }}
+                  </span>
+                }
+                <span>{{ vitrina.insignia }}</span>
+              </p>
+              <h3 class="font-headline-md text-headline-md text-on-surface mb-2">
+                {{ vitrina.titulo }}
+              </h3>
+              <p class="font-body-sm text-body-sm text-on-surface-variant mb-4">
+                {{ vitrina.descripcion }}
+              </p>
+            </div>
+            <a
+              [class]="
+                'font-label-md text-label-md flex items-center gap-2 transition-colors hover:text-secondary ' +
+                textoTono[tono]
+              "
+              routerLink="/catalogo"
+              [queryParams]="{ cat: categoria.nombre }"
             >
-          </a>
-        </article>
-      }
+              <span>{{ vitrina.cta }}</span>
+              <span
+                aria-hidden="true"
+                class="material-symbols-outlined text-[18px] transition-transform group-hover:translate-x-1"
+                >arrow_forward</span
+              >
+            </a>
+          </article>
+        }
+      </div>
     </div>
-  </div>
-</section>
+  </section>
+}
 
 <!-- ===================== DESTACADOS ===================== -->
 @if (destacados().length) {
@@ -384,7 +390,7 @@
             </li>
             <li class="p-3.5 rounded-2xl bg-surface-container-lowest/80 shadow-sm flex flex-col">
               <span class="font-headline-md text-headline-md text-secondary font-bold">
-                {{ totalFamilias }}
+                {{ totalFamilias() }}
               </span>
               <span class="font-body-sm text-body-sm text-on-surface-variant">
                 Familias de dulces por descubrir

@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { afterNextRender, computed, inject, Injectable, signal } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
-import { CATEGORIAS, ORIGEN_CATALOGO, PRODUCTOS, VITRINAS } from '../../content';
-import type { Categoria, Producto, Vitrina } from '../models/producto';
+import { CATEGORIAS, ORIGEN_CATALOGO, PRODUCTOS } from '../../content';
+import type { Categoria, Producto } from '../models/producto';
 
 /** Lo que responde `GET /api/publico/catalogo`. Ver `docs/contrato-sitio.md`. */
 interface CatalogoPublico {
@@ -10,8 +10,8 @@ interface CatalogoPublico {
   readonly productos: readonly Producto[];
 }
 
-/** Valor del filtro de categoría: una categoría concreta o todas. */
-export type Filtro = Categoria | 'todos';
+/** Valor del filtro: el nombre de una categoría, o todas. */
+export type Filtro = string;
 
 /**
  * De dónde sale el catálogo. La escribe el build, que es quien sabe contra qué
@@ -56,7 +56,16 @@ export class CatalogService {
    * no tiene ninguno, y el sitio la anuncia igual («Próximamente»).
    */
   readonly categorias = this.familias.asReadonly();
-  readonly vitrinas: readonly Vitrina[] = VITRINAS;
+
+  /**
+   * «Nuestras Categorías Dulces»: las categorías que tienen tarjeta, o sea las que
+   * tienen foto. Se capturan en la aplicación, junto a la categoría.
+   */
+  readonly vitrinas = computed(() =>
+    this.familias().filter((c): c is Categoria & { vitrina: NonNullable<Categoria['vitrina']> } =>
+      Boolean(c.vitrina),
+    ),
+  );
 
   /**
    * «Los Favoritos de la Casa» de la portada: los productos que traen su tarjeta escrita,
@@ -96,8 +105,8 @@ export class CatalogService {
   }
 
   /** Si una categoría todavía no tiene nada publicado: el sitio dice «Próximamente». */
-  estaVacia(categoria: Categoria): boolean {
-    return !this.lista().some((p) => p.categoria === categoria);
+  estaVacia(nombre: string): boolean {
+    return !this.lista().some((p) => p.categoria === nombre);
   }
 
   /**

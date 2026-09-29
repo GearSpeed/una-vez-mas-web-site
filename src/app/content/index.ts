@@ -16,13 +16,11 @@
  * porque de un JSON infiere `string`: esas se estrechan aquí con un guard que lanza
  * durante el prerender si trae un valor desconocido.
  */
-import type { Disponibilidad, Producto, Tono, Vitrina } from '../core/models/producto';
-import { TONOS } from '../core/models/producto';
+import type { Categoria, Disponibilidad, Producto } from '../core/models/producto';
 import type { Enlace, Faq, Sitio } from '../core/models/contenido';
 
 import catalogoJson from './catalogo.json';
 import catalogoOrigenJson from './catalogo-origen.json';
-import showcaseJson from './showcase.json';
 import faqJson from './faq.json';
 import linksJson from './links.json';
 import siteJson from './site.json';
@@ -39,18 +37,18 @@ function unaDe<T extends string>(valores: readonly T[], valor: string, campo: st
 type Crudo<T, K extends keyof T> = Omit<T, K> & { [P in K]: string };
 
 const productosCrudos: readonly Crudo<Producto, 'disponibilidad'>[] = catalogoJson.productos;
-const vitrinasCrudas: readonly Crudo<Vitrina, 'tono'>[] = showcaseJson;
 const enlacesCrudos: readonly Crudo<Enlace, 'estilo'>[] = linksJson;
 
 /** La API contra la que se compiló esta copia, y contra la que el sitio se refresca. */
 export const ORIGEN_CATALOGO: string = catalogoOrigenJson.url;
 
 /**
- * Las familias del catálogo, en el orden en que las manda la aplicación. **No se deducen
- * de los productos**: una categoría recién dada de alta todavía no tiene ninguno, y el
- * sitio la anuncia igual.
+ * Las familias del catálogo, en el orden en que las manda la aplicación, cada una con la
+ * tarjeta que le toca en Inicio (o `null` si no tiene foto). **No se deducen de los
+ * productos**: una categoría recién dada de alta todavía no tiene ninguno, y el sitio la
+ * anuncia igual.
  */
-export const CATEGORIAS: readonly string[] = catalogoJson.categorias;
+export const CATEGORIAS: readonly Categoria[] = catalogoJson.categorias;
 
 /** La copia del catálogo que trae el bundle: con lo que arranca el sitio. */
 export const PRODUCTOS: readonly Producto[] = productosCrudos.map((p) => ({
@@ -62,11 +60,6 @@ export const PRODUCTOS: readonly Producto[] = productosCrudos.map((p) => ({
   ),
 }));
 
-export const VITRINAS: readonly Vitrina[] = vitrinasCrudas.map((v) => ({
-  ...v,
-  tono: unaDe(TONOS, v.tono, `showcase.json[${v.titulo}].tono`),
-}));
-
 export const ENLACES: readonly Enlace[] = enlacesCrudos.map((e) => ({
   ...e,
   estilo: unaDe(ESTILOS, e.estilo, `links.json[${e.id}].estilo`),
@@ -74,14 +67,3 @@ export const ENLACES: readonly Enlace[] = enlacesCrudos.map((e) => ({
 
 export const FAQS: readonly Faq[] = faqJson;
 export const SITIO: Sitio = siteJson;
-
-/**
- * Las vitrinas de Inicio enlazan a una categoría por su nombre, y las categorías las
- * decide ahora la aplicación. Si alguien renombra una, esto lo dice al construir, que es
- * cuando todavía se puede arreglar; si no, quedaría un filtro que no devuelve nada.
- */
-for (const v of VITRINAS) {
-  if (!CATEGORIAS.includes(v.categoria)) {
-    throw new Error(`showcase.json: la categoría "${v.categoria}" no existe en el catálogo`);
-  }
-}
