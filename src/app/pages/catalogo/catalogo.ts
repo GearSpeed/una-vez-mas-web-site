@@ -5,6 +5,7 @@ import {
   effect,
   inject,
   linkedSignal,
+  untracked,
 } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, Router, RouterLink, RouterOutlet } from '@angular/router';
@@ -41,11 +42,19 @@ export class Catalogo {
    * una vista filtrada se pueda compartir. `linkedSignal` deja que el usuario
    * escriba libremente y se resincroniza si la URL cambia desde fuera (un enlace
    * de Inicio, o el botón atrás del navegador).
+   *
+   * `nombres()` se lee con `untracked`: sólo valida que la categoría exista al
+   * entrar por esa URL. Si se leyera reactivo, cada refresco del catálogo en
+   * segundo plano (`CatalogService.refrescar()`) recalcularía el filtro y, en el
+   * instante en que `categorias()` todavía no tuviera la lista nueva, lo tiraría
+   * de vuelta a «todos» — perdiendo la categoría de alguien que entró por un
+   * enlace compartido.
    */
   protected readonly filtro = linkedSignal<Filtro>(() => {
     const cat = this.params().get('cat');
-    return cat && this.nombres().includes(cat) ? cat : 'todos';
+    return cat && untracked(this.nombres).includes(cat) ? cat : 'todos';
   });
+
   protected readonly busqueda = linkedSignal(() => this.params().get('q') ?? '');
 
   protected readonly visibles = computed(() =>

@@ -1,5 +1,11 @@
 import { describe, expect, it } from 'vitest';
-import { avisoDisponibilidad, precioVisible, waTextoDe, type Producto } from './producto';
+import {
+  avisoDescuento,
+  avisoDisponibilidad,
+  precioVisible,
+  waTextoDe,
+  type Producto,
+} from './producto';
 
 describe('precioVisible', () => {
   it('quita los centavos cuando son cero, como se lee en el mostrador', () => {
@@ -31,6 +37,25 @@ describe('avisoDisponibilidad', () => {
 
   it('que algo esté disponible no hace falta decirlo', () => {
     expect(avisoDisponibilidad('disponible')).toBeNull();
+  });
+});
+
+describe('avisoDescuento', () => {
+  it('sin escalones, no hay nada que avisar', () => {
+    expect(avisoDescuento([])).toBeNull();
+  });
+
+  it('con un escalón, dice el porcentaje y desde cuántas piezas', () => {
+    expect(avisoDescuento([{ desde: 12, tasa: '0.1500' }])).toBe('15% desde 12 piezas');
+  });
+
+  it('con los dos escalones, los muestra ambos en orden', () => {
+    expect(
+      avisoDescuento([
+        { desde: 6, tasa: '0.1000' },
+        { desde: 12, tasa: '0.1500' },
+      ]),
+    ).toBe('10% desde 6 piezas · 15% desde 12');
   });
 });
 

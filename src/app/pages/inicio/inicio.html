@@ -187,19 +187,31 @@
                   [src]="imagen?.urlChica"
                 />
               </div>
-              <p
-                [class]="
-                  'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface-container-high font-label-sm text-label-sm mb-2 ' +
-                  textoTono[tono]
-                "
-              >
-                @if (vitrina.icono) {
-                  <span aria-hidden="true" class="material-symbols-outlined text-[16px]">
-                    {{ vitrina.icono }}
-                  </span>
+              <div class="flex items-center gap-2 flex-wrap mb-2">
+                <p
+                  [class]="
+                    'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface-container-high font-label-sm text-label-sm m-0 ' +
+                    textoTono[tono]
+                  "
+                >
+                  @if (vitrina.icono) {
+                    <span aria-hidden="true" class="material-symbols-outlined text-[16px]">
+                      {{ vitrina.icono }}
+                    </span>
+                  }
+                  <span>{{ vitrina.insignia }}</span>
+                </p>
+                @if (descuentoDe(categoria); as texto) {
+                  <p
+                    class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-sm text-label-sm m-0"
+                  >
+                    <span aria-hidden="true" class="material-symbols-outlined text-[16px]"
+                      >sell</span
+                    >
+                    <span>{{ texto }}</span>
+                  </p>
                 }
-                <span>{{ vitrina.insignia }}</span>
-              </p>
+              </div>
               <h3 class="font-headline-md text-headline-md text-on-surface mb-2">
                 {{ vitrina.titulo }}
               </h3>

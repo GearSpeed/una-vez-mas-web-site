@@ -141,7 +141,15 @@ export class CatalogService {
    */
   async refrescar(): Promise<void> {
     try {
-      const catalogo = await firstValueFrom(this.http.get<CatalogoPublico>(urlDelCatalogo()));
+      // La respuesta trae `stale-while-revalidate=600`, pensada para Cloudflare delante
+      // del sitio en producción; en desarrollo local, sin ese borde, el propio navegador
+      // la sirve de su caché por minutos sin tocar la red. Un parámetro que cambia en
+      // cada llamada evita que la URL coincida con nada en caché —sin agregar una
+      // cabecera, que dispararía un preflight CORS que el proxy de `ng serve` no sabe
+      // responder—. El backend lo ignora: la ruta no depende de la cadena de consulta.
+      const catalogo = await firstValueFrom(
+        this.http.get<CatalogoPublico>(`${urlDelCatalogo()}?desde=${Date.now()}`),
+      );
       // Los dos juntos o ninguno: media respuesta dejaría categorías y productos de
       // momentos distintos, y con ellos un «Próximamente» sobre una vitrina con cosas.
       if (catalogo?.productos?.length > 0 && catalogo.categorias?.length > 0) {
