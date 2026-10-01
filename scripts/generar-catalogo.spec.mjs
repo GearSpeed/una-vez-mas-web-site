@@ -96,4 +96,40 @@ describe('generar-catalogo', () => {
     expect(readFileSync(destino, 'utf8')).toBe(original);
     expect(stderr).toMatch(/forma \{ categorias, productos \}/);
   });
+
+  it('deja la copia intacta si un escalón de descuento viene mal formado', async () => {
+    const original = antes();
+    responder = () => ({
+      estado: 200,
+      cuerpo: JSON.stringify({
+        categorias: [
+          {
+            nombre: 'Galletas',
+            vitrina: null,
+            // `desde` debería ser number, no texto.
+            descuentoVolumen: [{ desde: '6', tasa: '0.1000' }],
+          },
+        ],
+        productos: [
+          {
+            slug: 'galletas-avena',
+            nombre: 'Galletas de Avena',
+            categoria: 'Galletas',
+            resumen: '',
+            descripcion: '',
+            ingredientes: [],
+            precio: null,
+            presentacion: null,
+            disponibilidad: 'disponible',
+            imagen: { url: '', urlChica: '', alt: '', esPlaceholder: true },
+            destacado: null,
+          },
+        ],
+      }),
+    });
+    const { stderr } = await correr(url);
+
+    expect(readFileSync(destino, 'utf8')).toBe(original);
+    expect(stderr).toMatch(/no cumplen el contrato/);
+  });
 });

@@ -5,6 +5,7 @@ import { CatalogService } from '../../core/services/catalog';
 import { SeoService } from '../../core/services/seo';
 import { WhatsappService } from '../../core/services/whatsapp';
 import {
+  avisoDescuento,
   avisoDisponibilidad,
   type Categoria,
   precioVisible,
@@ -106,5 +107,10 @@ export class Inicio {
   /** Su foto propia, o una de sus productos, sorteada en cada visita. */
   protected imagenDe(categoria: Categoria) {
     return this.catalogo.imagenDeVitrina(categoria);
+  }
+
+  /** «10% desde 6 piezas», o ambos escalones si tiene los dos. `null`: no tiene. */
+  protected descuentoDe(categoria: Categoria): string | null {
+    return avisoDescuento(categoria.descuentoVolumen);
   }
 }

@@ -67,7 +67,20 @@ function esCategoria(categoria) {
     typeof categoria === 'object' &&
     typeof categoria.nombre === 'string' &&
     categoria.nombre.length > 0 &&
-    esVitrina(categoria.vitrina)
+    esVitrina(categoria.vitrina) &&
+    Array.isArray(categoria.descuentoVolumen) &&
+    categoria.descuentoVolumen.every(esEscalonDescuento)
+  );
+}
+
+/** Un escalón de su descuento por llevar cantidad. */
+function esEscalonDescuento(escalon) {
+  return (
+    escalon !== null &&
+    typeof escalon === 'object' &&
+    typeof escalon.desde === 'number' &&
+    escalon.desde > 0 &&
+    typeof escalon.tasa === 'string'
   );
 }
 

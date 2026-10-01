@@ -116,7 +116,7 @@ describe('CatalogService', () => {
 
     it('el precio que llega de la API sustituye al de la copia', async () => {
       const refresco = catalogo.refrescar();
-      http.expectOne(urlDelCatalogo()).flush(respuesta());
+      http.expectOne((r) => r.url.startsWith(urlDelCatalogo())).flush(respuesta());
       await refresco;
 
       expect(catalogo.porId('galletas-avena')?.precio).toBe('99.00');
@@ -126,7 +126,7 @@ describe('CatalogService', () => {
     it('trae categorías que todavía no tienen ningún producto', async () => {
       const refresco = catalogo.refrescar();
       http
-        .expectOne(urlDelCatalogo())
+        .expectOne((r) => r.url.startsWith(urlDelCatalogo()))
         .flush(respuesta({ categorias: [categoria('Galletas'), categoria('Paletas')] }));
       await refresco;
 
@@ -137,17 +137,19 @@ describe('CatalogService', () => {
 
     it('la portada sale del catálogo y respeta su orden', async () => {
       const refresco = catalogo.refrescar();
-      http.expectOne(urlDelCatalogo()).flush(
-        respuesta({
-          productos: [
-            producto({ slug: 'sin-portada' }),
-            producto({
-              slug: 'en-portada',
-              destacado: { etiqueta: 'Clásico', quip: 'El favorito de Ami', texto: 'Rico.' },
-            }),
-          ],
-        }),
-      );
+      http
+        .expectOne((r) => r.url.startsWith(urlDelCatalogo()))
+        .flush(
+          respuesta({
+            productos: [
+              producto({ slug: 'sin-portada' }),
+              producto({
+                slug: 'en-portada',
+                destacado: { etiqueta: 'Clásico', quip: 'El favorito de Ami', texto: 'Rico.' },
+              }),
+            ],
+          }),
+        );
       await refresco;
 
       expect(catalogo.destacados().map((p) => p.slug)).toEqual(['en-portada']);
@@ -155,7 +157,7 @@ describe('CatalogService', () => {
 
     it('sin ninguno prendido, la portada se queda sin tarjetas', async () => {
       const refresco = catalogo.refrescar();
-      http.expectOne(urlDelCatalogo()).flush(respuesta());
+      http.expectOne((r) => r.url.startsWith(urlDelCatalogo())).flush(respuesta());
       await refresco;
 
       expect(catalogo.destacados()).toEqual([]);
@@ -163,11 +165,17 @@ describe('CatalogService', () => {
 
     it('solo las categorías con tarjeta salen en «Nuestras Categorías Dulces»', async () => {
       const refresco = catalogo.refrescar();
-      http.expectOne(urlDelCatalogo()).flush(
-        respuesta({
-          categorias: [categoria('Obleas'), categoria('Galletas', laVitrina), categoria('Paletas')],
-        }),
-      );
+      http
+        .expectOne((r) => r.url.startsWith(urlDelCatalogo()))
+        .flush(
+          respuesta({
+            categorias: [
+              categoria('Obleas'),
+              categoria('Galletas', laVitrina),
+              categoria('Paletas'),
+            ],
+          }),
+        );
       await refresco;
 
       // Las tres siguen sirviendo para filtrar el catálogo…
@@ -192,7 +200,7 @@ describe('CatalogService', () => {
 
       const refrescarCon = async (cuerpo: object) => {
         const refresco = catalogo.refrescar();
-        http.expectOne(urlDelCatalogo()).flush(cuerpo);
+        http.expectOne((r) => r.url.startsWith(urlDelCatalogo())).flush(cuerpo);
         await refresco;
       };
 
@@ -264,7 +272,9 @@ describe('CatalogService', () => {
     it('si la API falla, se queda el catálogo anterior', async () => {
       const antes = catalogo.productos();
       const refresco = catalogo.refrescar();
-      http.expectOne(urlDelCatalogo()).error(new ProgressEvent('error'), { status: 503 });
+      http
+        .expectOne((r) => r.url.startsWith(urlDelCatalogo()))
+        .error(new ProgressEvent('error'), { status: 503 });
       await refresco;
 
       expect(catalogo.productos()).toBe(antes);
@@ -273,7 +283,9 @@ describe('CatalogService', () => {
     it('una respuesta vacía tampoco borra el catálogo', async () => {
       const antes = catalogo.productos();
       const refresco = catalogo.refrescar();
-      http.expectOne(urlDelCatalogo()).flush({ categorias: [], productos: [] });
+      http
+        .expectOne((r) => r.url.startsWith(urlDelCatalogo()))
+        .flush({ categorias: [], productos: [] });
       await refresco;
 
       expect(catalogo.productos()).toBe(antes);
@@ -284,7 +296,9 @@ describe('CatalogService', () => {
       const productosAntes = catalogo.productos();
       const categoriasAntes = catalogo.categorias();
       const refresco = catalogo.refrescar();
-      http.expectOne(urlDelCatalogo()).flush({ categorias: [categoria('Paletas')], productos: [] });
+      http
+        .expectOne((r) => r.url.startsWith(urlDelCatalogo()))
+        .flush({ categorias: [categoria('Paletas')], productos: [] });
       await refresco;
 
       expect(catalogo.productos()).toBe(productosAntes);

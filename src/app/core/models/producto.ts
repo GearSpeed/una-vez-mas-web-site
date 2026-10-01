@@ -13,6 +13,20 @@ export interface Categoria {
   readonly nombre: string;
   /** Su tarjeta en Inicio, o `null` si no tiene foto: sin foto no hay tarjeta. */
   readonly vitrina: Vitrina | null;
+  /**
+   * Escalones de su descuento por llevar cantidad, de menor a mayor piezas. Vacío: no
+   * tiene. Las piezas se cuentan sumando toda la categoría, no por producto. Ver
+   * `avisoDescuento()`.
+   */
+  readonly descuentoVolumen: readonly EscalonDescuento[];
+}
+
+/** Un escalón del descuento por volumen de una categoría. */
+export interface EscalonDescuento {
+  /** Piezas de la categoría a partir de las cuales entra este escalón. */
+  readonly desde: number;
+  /** Proporción cruda: `"0.1000"` = 10 %. Ver `avisoDescuento()`. */
+  readonly tasa: string;
 }
 
 /** Tono de la píldora de categoría, según el design system. */
@@ -137,4 +151,21 @@ export function avisoDisponibilidad(disponibilidad: Disponibilidad): string | nu
     default:
       return null;
   }
+}
+
+/**
+ * El texto de la etiqueta de descuento de una categoría: «10% desde 6 piezas» o, con los
+ * dos escalones activos, «10% desde 6 piezas · 15% desde 12». Sin escalones, `null`: que
+ * no hay descuento no hace falta decirlo.
+ */
+export function avisoDescuento(escalones: readonly EscalonDescuento[]): string | null {
+  if (escalones.length === 0) return null;
+  return escalones
+    .map((escalon, i) => {
+      const porcentaje = Math.round(Number(escalon.tasa) * 100);
+      return i === 0
+        ? `${porcentaje}% desde ${escalon.desde} piezas`
+        : `${porcentaje}% desde ${escalon.desde}`;
+    })
+    .join(' · ');
 }

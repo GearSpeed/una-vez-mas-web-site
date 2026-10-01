@@ -9,7 +9,8 @@
         "titulo": "Galletas de Amaranto",
         "cta": "Ver nuestras galletas",
         "imagen": null
-      }
+      },
+      "descuentoVolumen": []
     },
     {
       "nombre": "Borrachitos",
@@ -20,7 +21,8 @@
         "titulo": "Borrachitos Finos",
         "cta": "Explorar licores dulces",
         "imagen": null
-      }
+      },
+      "descuentoVolumen": []
     },
     {
       "nombre": "Alegrías",
@@ -31,7 +33,8 @@
         "titulo": "Alegrías de Amaranto",
         "cta": "Ver variedades de alegría",
         "imagen": null
-      }
+      },
+      "descuentoVolumen": []
     }
   ],
   "productos": [
